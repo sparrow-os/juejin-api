@@ -58,6 +58,8 @@ public class Knife4jConfiguration {
                         RequestHandlerSelectors.basePackage("com.sparrow.cms.controller")
                                 .or(RequestHandlerSelectors.basePackage("com.sparrow.article.controller"))
                                 .or(RequestHandlerSelectors.basePackage("com.sparrow.tag.controller"))
+                                .or(RequestHandlerSelectors.basePackage("com.sparrow.recommend.controller"))
+                                .or(RequestHandlerSelectors.basePackage("com.sparrow.interact.controller"))
                                 .or(RequestHandlerSelectors.basePackage("com.sparrow.passport.controller")))
 
                 .paths(PathSelectors.any())
