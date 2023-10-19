@@ -10,7 +10,7 @@
     <parent>
         <artifactId>sparrow-bom</artifactId>
         <groupId>com.sparrowzoo</groupId>
-        <version>1.0.3.1-RELEASE</version>
+        <version>1.0.4-RELEASE</version>
         <relativePath/>
     </parent>
     <properties>
@@ -32,6 +32,11 @@
         <dependency>
             <groupId>com.sparrowzoo</groupId>
             <artifactId>sparrow-protocol</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sparrowzoo</groupId>
+            <artifactId>sparrow-protocol-dao</artifactId>
         </dependency>
 
         <dependency>
