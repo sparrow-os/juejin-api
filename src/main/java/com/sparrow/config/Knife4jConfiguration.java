@@ -17,10 +17,8 @@
 
 package com.sparrow.config;
 
-import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -30,39 +28,17 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
-import java.util.function.Predicate;
-
 
 @Configuration
-//@ConditionalOnProperty(prefix = "sparrow", name = "profile", havingValue = "dev")
 @EnableSwagger2WebMvc
 public class Knife4jConfiguration {
     @Bean
     public ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Sparrow Juejin")
-                .description("Sparrow Developer Community")
-                .termsOfServiceUrl("www.sparrowzoo.com")
-                .contact(new Contact("harry", "http://www.sparrowzoo.com", "zh_harry@163.com"))
-                .version("1.0")
-                .build();
+        return new ApiInfoBuilder().title("Sparrow Juejin").description("Sparrow Developer Community").termsOfServiceUrl("www.sparrowzoo.com").contact(new Contact("harry", "http://www.sparrowzoo.com", "zh_harry@163.com")).version("1.0").build();
     }
 
     @Bean
     public Docket createRestApi(ApiInfo apiInfo) {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo)
-                .groupName("sparrow")
-                .select()
-                .apis(
-                        RequestHandlerSelectors.basePackage("com.sparrow.cms.controller")
-                                .or(RequestHandlerSelectors.basePackage("com.sparrow.article.controller"))
-                                .or(RequestHandlerSelectors.basePackage("com.sparrow.tag.controller"))
-                                .or(RequestHandlerSelectors.basePackage("com.sparrow.recommend.controller"))
-                                .or(RequestHandlerSelectors.basePackage("com.sparrow.interact.controller"))
-                                .or(RequestHandlerSelectors.basePackage("com.sparrow.passport.controller")))
-
-                .paths(PathSelectors.any())
-                .build();
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo).groupName("sparrow").select().apis(RequestHandlerSelectors.basePackage("com.sparrow.article.controller")).paths(PathSelectors.any()).build();
     }
 }

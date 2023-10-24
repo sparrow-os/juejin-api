@@ -1,1 +1,6 @@
-init
+.or(RequestHandlerSelectors.basePackage("com.sparrow.cms.controller"))
+                                .or(RequestHandlerSelectors.basePackage("com.sparrow.tag.controller"))
+                                        .or(RequestHandlerSelectors.basePackage("com.sparrow.recommend.controller"))
+                                        .or(RequestHandlerSelectors.basePackage("com.sparrow.interact.controller"))
+                                        .or(RequestHandlerSelectors.basePackage("com.sparrow.passport.controller"))
+//@ConditionalOnProperty(prefix = "sparrow", name = "profile", havingValue = "dev")
