@@ -18,10 +18,8 @@ https://github.com/pandao/editor.md/blob/master/CHANGE.md
 - 安装mathjax
 npm install mathjax@3
 - 查看安装结果 
-npm ls
+- npm ls
 
 Mathjax和katex的功能比较（VSCode+MPE）
-
 https://zhuanlan.zhihu.com/p/381263375
-
 http://www.ipandao.com/about
