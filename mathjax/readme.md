@@ -8,7 +8,7 @@ https://github.com/pandao/editor.md/blob/master/CHANGE.md
 
 
 - 初始化npm，生成package.json文件
-```agsl
+```
  npm init -y
 ```
 命令的作用是: 对项目进行初始化操作,对包进行管理

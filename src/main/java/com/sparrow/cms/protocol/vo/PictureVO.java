@@ -4,24 +4,24 @@ import com.sparrow.protocol.VO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel("菜单")
-public class MenuVO implements VO {
-    @ApiModelProperty("菜单ID")
-    private Integer id;
-    @ApiModelProperty("菜单名")
+@ApiModel("图片")
+public class PictureVO implements VO {
+    @ApiModelProperty("图片ID")
+    private Long id;
+    @ApiModelProperty("图片名称")
     private String name;
-    @ApiModelProperty("菜单icon")
+    @ApiModelProperty("图片图标")
     private String icon;
-    @ApiModelProperty("菜单描述")
+    @ApiModelProperty("图片描述")
     private String desc;
-    @ApiModelProperty("url")
+    @ApiModelProperty("图片url")
     private String url;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

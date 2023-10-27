@@ -15,10 +15,6 @@ import java.util.List;
 @RequestMapping("content")
 @Api(value = "内容管理系统", tags = "内容管理系统")
 public class ContentController {
-    ContentController() {
-        System.out.printf("content controller bean init");
-    }
-
     @ApiOperation(value = "菜单列表")
     @GetMapping("menu")
     public List<MenuVO> menus() {
