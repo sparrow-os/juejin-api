@@ -1,22 +1,11 @@
 package com.sparrow.passport.protocol.param.password;
 
-import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.POJO;
 import com.sparrow.protocol.Param;
 
 public class PasswordModifyParam implements Param {
-    private Long userId;
     private String password;
     private String newPassword;
-    private ClientInformation client;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    private String newConfirmPassword;
 
     public String getPassword() {
         return password;
@@ -34,11 +23,11 @@ public class PasswordModifyParam implements Param {
         this.newPassword = newPassword;
     }
 
-    public ClientInformation getClient() {
-        return client;
+    public String getNewConfirmPassword() {
+        return newConfirmPassword;
     }
 
-    public void setClient(ClientInformation client) {
-        this.client = client;
+    public void setNewConfirmPassword(String newConfirmPassword) {
+        this.newConfirmPassword = newConfirmPassword;
     }
 }

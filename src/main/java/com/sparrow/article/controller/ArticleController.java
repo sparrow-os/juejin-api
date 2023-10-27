@@ -23,7 +23,7 @@ public class ArticleController {
     }
 
 
-    @PostMapping("draft")
+    @PostMapping(value = "draft")
     @ApiOperation("保存草稿")
     public Result<Boolean> draft(@RequestBody String content) {
         return new Result<>(true);
@@ -32,6 +32,7 @@ public class ArticleController {
     @GetMapping("my")
     @ApiOperation("我的文章")
     public List<AbstractArticleVO> my() {
+
         List<AbstractArticleVO> abstractArticles = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             AbstractArticleVO abstractArticle = new AbstractArticleVO();

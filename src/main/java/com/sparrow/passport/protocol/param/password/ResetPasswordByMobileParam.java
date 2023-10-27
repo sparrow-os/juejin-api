@@ -5,6 +5,7 @@ import com.sparrow.protocol.Param;
 public class ResetPasswordByMobileParam implements Param {
     private String validateCode;
     private String password;
+    private String confirmPassword;
 
     public String getValidateCode() {
         return validateCode;
@@ -20,5 +21,13 @@ public class ResetPasswordByMobileParam implements Param {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

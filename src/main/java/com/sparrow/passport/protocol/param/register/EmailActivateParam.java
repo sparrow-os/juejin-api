@@ -1,34 +1,19 @@
 package com.sparrow.passport.protocol.param.register;
 
-import com.sparrow.protocol.ClientInformation;
 import com.sparrow.protocol.Param;
 
 public class EmailActivateParam implements Param {
-    private String email;
-    private Long userId;
-    private ClientInformation client;
+    /**
+     * 对称加密
+     * userId email 在token里的
+     */
+    private String token;
 
-    public String getEmail() {
-        return email;
+    public String getToken() {
+        return token;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public ClientInformation getClient() {
-        return client;
-    }
-
-    public void setClient(ClientInformation client) {
-        this.client = client;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

@@ -17,4 +17,10 @@ public class LoginController {
     public Result<String> login(@RequestBody LoginQuery loginQuery) {
         return new Result<>("token");
     }
+
+    @ApiOperation("退出")
+    @PostMapping("logout")
+    public Result<Boolean> logout(){
+        return new Result<>(true);
+    }
 }

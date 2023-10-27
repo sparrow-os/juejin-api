@@ -5,6 +5,7 @@ import com.sparrow.protocol.Param;
 public class PasswordResetParam implements Param {
     private String token;
     private String password;
+    private String  confirmPassword;
 
     public String getToken() {
         return token;
@@ -20,5 +21,13 @@ public class PasswordResetParam implements Param {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

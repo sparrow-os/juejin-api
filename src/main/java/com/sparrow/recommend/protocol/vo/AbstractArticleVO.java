@@ -21,7 +21,6 @@ public class AbstractArticleVO {
     private Integer likeCount;
     @ApiModelProperty("踩数")
     private Integer dislikeCount;
-
     @ApiModelProperty("展示数")
     private Integer viewCount;
     @ApiModelProperty("标签")

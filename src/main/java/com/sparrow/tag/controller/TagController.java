@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @Api(value = "标签系统", tags = "标签系统")
 public class TagController {
+
     @ApiOperation("标签列表")
     @GetMapping("list")
     public List<SimpleTagVO> list(@ApiParam("最后标签id") Long lastId) {
