@@ -1,6 +1,7 @@
 package com.sparrow.interact.controller;
 
 import com.sparrow.interact.protocol.param.CommentParam;
+import com.sparrow.interact.protocol.param.ReplyCommentParam;
 import com.sparrow.interact.protocol.query.CommentQuery;
 import com.sparrow.interact.protocol.vo.CommentVO;
 import com.sparrow.protocol.Result;
@@ -17,9 +18,18 @@ import java.util.List;
 @RequestMapping("interact")
 @Api(value = "交互系统", tags = "交互系统")
 public class CommentController {
-    @PostMapping("fav")
-    @ApiOperation("收藏")
+
+
+    @PostMapping("comment")
+    @ApiOperation("评论")
     public Result<Boolean> comment(@RequestBody CommentParam commentParam) {
+        return new Result<>(true);
+    }
+
+
+    @PostMapping("reply-comment")
+    @ApiOperation("评论")
+    public Result<Boolean> replayComment(@RequestBody ReplyCommentParam commentParam) {
         return new Result<>(true);
     }
 

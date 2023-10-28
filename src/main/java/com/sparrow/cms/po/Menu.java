@@ -29,6 +29,10 @@ public class Menu extends PO {
     @Column(name = "status", columnDefinition = "tinyint(1)  DEFAULT 0 COMMENT '状态'", nullable = false)
     private Integer status;
 
+    @FieldOrder(order = 4)
+    @Column(name = "sort", columnDefinition = "int(11)  DEFAULT 0 COMMENT '排序'", nullable = false)
+    private Integer sort;
+
     public Long getId() {
         return id;
     }
@@ -67,5 +71,13 @@ public class Menu extends PO {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

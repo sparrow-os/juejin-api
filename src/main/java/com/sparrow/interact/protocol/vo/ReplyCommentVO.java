@@ -9,6 +9,9 @@ public class ReplyCommentVO {
     private Long id;
     @ApiModelProperty("文章ID")
     private Long articleId;
+
+    @ApiModelProperty("回复ID")
+    private Long replyCommentId;
     @ApiModelProperty("内容")
     private Long content;
     @ApiModelProperty("评论人昵称")
@@ -25,8 +28,7 @@ public class ReplyCommentVO {
     private String formatTime;
     @ApiModelProperty("被点赞数")
     private Integer likeCount;
-    @ApiModelProperty("回复ID")
-    private Long replyCommentId;
+
     @ApiModelProperty("回复的作者ID")
     private Long replyToUserId;
     @ApiModelProperty("回复的作者昵称")
