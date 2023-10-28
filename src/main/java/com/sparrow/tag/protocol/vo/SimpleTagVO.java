@@ -6,16 +6,16 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("标签")
 public class SimpleTagVO {
     @ApiModelProperty("ID")
-    private Long tagId;
+    private Long id;
     @ApiModelProperty("标签名")
     private String tagName;
 
-    public Long getTagId() {
-        return tagId;
+    public Long getId() {
+        return id;
     }
 
     public void setTagId(Long tagId) {
-        this.tagId = tagId;
+        this.id = tagId;
     }
 
     public String getTagName() {

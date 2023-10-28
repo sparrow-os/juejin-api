@@ -14,7 +14,7 @@ public class LoginController {
 
     @ApiOperation("密码登录")
     @PostMapping("login")
-    public Result<String> login(@RequestBody LoginQuery loginQuery) {
+    public Result<String> login(@RequestBody LoginQuery user) {
         return new Result<>("token");
     }
 

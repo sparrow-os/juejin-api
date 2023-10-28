@@ -4,17 +4,17 @@ import com.sparrow.protocol.VO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel("菜单")
-public class MenuVO implements VO {
-    @ApiModelProperty("菜单ID")
+@ApiModel("友情链接")
+public class FriendLinkVO implements VO {
+    @ApiModelProperty("友链ID")
     private Integer id;
-    @ApiModelProperty("菜单名")
+    @ApiModelProperty("友链名称")
     private String name;
-    @ApiModelProperty("菜单icon")
+    @ApiModelProperty("友链图标")
     private String icon;
-    @ApiModelProperty("菜单描述")
+    @ApiModelProperty("友链描述")
     private String desc;
-    @ApiModelProperty("url")
+    @ApiModelProperty("友链url")
     private String url;
 
     public Integer getId() {
