@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Category extends PO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "int(11) UNSIGNED AUTO_INCREMENT")
+    @Column(name = "id", columnDefinition = "int(11) UNSIGNED")
     private Long id;
 
     @Column(name = "code",

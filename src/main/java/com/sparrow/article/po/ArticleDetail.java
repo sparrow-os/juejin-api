@@ -7,8 +7,8 @@ import javax.persistence.*;
 @Table(name = "article_detail")
 public class ArticleDetail extends PO {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "int(11) UNSIGNED AUTO_INCREMENT")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", columnDefinition = "int(11) UNSIGNED")
     private Long id;
 
     @Column(name = "content",

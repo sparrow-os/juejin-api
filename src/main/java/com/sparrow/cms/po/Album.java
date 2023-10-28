@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Album extends PO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "int(11) UNSIGNED AUTO_INCREMENT")
+    @Column(name = "id", columnDefinition = "int(11) UNSIGNED")
     @FieldOrder(order = 1)
     private Long id;
 
@@ -23,7 +23,7 @@ public class Album extends PO {
 
 
     @FieldOrder(order = 4)
-    @Column(name = "description", columnDefinition = "varchar(32)  DEFAULT '' COMMENT '相册说明描述'", nullable = false)
+    @Column(name = "description", columnDefinition = "varchar(512)  DEFAULT '' COMMENT '相册说明描述'", nullable = false)
     private String description;
 
 

@@ -9,7 +9,7 @@ public class UserBehavior {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "int(11) UNSIGNED AUTO_INCREMENT")
+    @Column(name = "id", columnDefinition = "int(11) UNSIGNED")
     @FieldOrder(order = 1)
     private Long id;
 

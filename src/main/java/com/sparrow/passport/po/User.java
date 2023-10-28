@@ -18,15 +18,13 @@ import javax.persistence.Table;
 public class User implements Cloneable, POJO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", columnDefinition = "int(11) UNSIGNED AUTO_INCREMENT")
+    @Column(name = "user_id", columnDefinition = "int(11) UNSIGNED")
     @FieldOrder(order = 1)
-
     private Long userId;
 
 
     @FieldOrder(order = 2)
     @Column(name = "user_name", columnDefinition = " varchar(64) DEFAULT '' COMMENT '用户名'", nullable = false, updatable = false, unique = true)
-
     private String userName;
 
     @FieldOrder(order = 3)
