@@ -18,15 +18,15 @@ public class Comment extends PO {
     private Long articleId;
 
     @FieldOrder(order = 3)
-    @Column(name = "content", columnDefinition = "varchar(256) DEFAULT 0 COMMENT '评论内容'", nullable = false)
+    @Column(name = "content", columnDefinition = "varchar(512) DEFAULT 0 COMMENT '评论内容'", nullable = false)
     private String content;
 
     @FieldOrder(order = 4)
-    @Column(name = "like_count", columnDefinition = "int(11) DEFAULT 0 COMMENT '喜欢数'", nullable = false)
+    @Column(name = "like_count", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '喜欢数'", nullable = false)
     private Integer likeCount;
 
     @FieldOrder(order = 5)
-    @Column(name = "comment_count", columnDefinition = "int(11) DEFAULT 0 COMMENT '评论数'", nullable = false)
+    @Column(name = "comment_count", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '评论数'", nullable = false)
     private Integer commentCount;
 
     public Long getId() {

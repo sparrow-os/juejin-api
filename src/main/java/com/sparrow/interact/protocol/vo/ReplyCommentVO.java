@@ -9,7 +9,6 @@ public class ReplyCommentVO {
     private Long id;
     @ApiModelProperty("文章ID")
     private Long articleId;
-
     @ApiModelProperty("回复ID")
     private Long replyCommentId;
     @ApiModelProperty("内容")

@@ -12,8 +12,7 @@ public class ArticleDetail extends PO {
     private Long id;
 
     @Column(name = "content",
-            columnDefinition = "varchar(256)  DEFAULT '' COMMENT '标题'",
-            nullable = false)
+            columnDefinition = "text COMMENT '内容'")
     private String content;
 
     public Long getId() {

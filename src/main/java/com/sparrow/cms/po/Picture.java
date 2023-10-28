@@ -25,15 +25,15 @@ public class Picture extends PO {
     @Column(name = "url", columnDefinition = "varchar(128)  DEFAULT '' COMMENT '图片url'", nullable = false)
     private String url;
 
-    @FieldOrder(order = 4)
+    @FieldOrder(order = 5)
     @Column(name = "description", columnDefinition = "varchar(128)  DEFAULT '' COMMENT '图片说明描述'", nullable = false)
     private String description;
 
-    @FieldOrder(order = 4)
+    @FieldOrder(order = 6)
     @Column(name = "link_url", columnDefinition = "varchar(128)  DEFAULT '' COMMENT '链接地址'", nullable = false)
     private String linkUrl;
 
-    @FieldOrder(order = 5)
+    @FieldOrder(order = 7)
     @Column(name = "status", columnDefinition = "tinyint(1)  DEFAULT 0 COMMENT '状态 0:无效，1:有效'", nullable = false)
     private Integer status;
 

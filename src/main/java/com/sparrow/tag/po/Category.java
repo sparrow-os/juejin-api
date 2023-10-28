@@ -36,11 +36,6 @@ public class Category extends PO {
             nullable = false)
     private Integer depth;
 
-    @Column(name = "is_leaf",
-            columnDefinition = "tinyint(1) DEFAULT 0 COMMENT '是否叶子节点'",
-            nullable = false)
-    private Integer isLeaf;
-
     @Column(name = "status",
             columnDefinition = "tinyint(3)  UNSIGNED DEFAULT 0 COMMENT '状态'",
             nullable = false)
@@ -92,14 +87,6 @@ public class Category extends PO {
 
     public void setDepth(Integer depth) {
         this.depth = depth;
-    }
-
-    public Integer getIsLeaf() {
-        return isLeaf;
-    }
-
-    public void setIsLeaf(Integer isLeaf) {
-        this.isLeaf = isLeaf;
     }
 
     public Integer getStatus() {

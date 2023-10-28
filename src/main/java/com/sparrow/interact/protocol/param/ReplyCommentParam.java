@@ -77,4 +77,12 @@ public class ReplyCommentParam {
     public void setReplyToIcon(String replyToIcon) {
         this.replyToIcon = replyToIcon;
     }
+
+    public Long getRootCommentId() {
+        return rootCommentId;
+    }
+
+    public void setRootCommentId(Long rootCommentId) {
+        this.rootCommentId = rootCommentId;
+    }
 }

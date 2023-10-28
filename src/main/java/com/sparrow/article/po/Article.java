@@ -27,7 +27,7 @@ public class Article extends PO {
     private String title;
 
     @Column(name = "abstracts",
-            columnDefinition = "varchar(128)  DEFAULT '' COMMENT '摘要'",
+            columnDefinition = "varchar(512)  DEFAULT '' COMMENT '摘要'",
             nullable = false)
     private String abstracts;
 

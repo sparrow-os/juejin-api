@@ -48,15 +48,15 @@ public class UserBehavior {
     @Column(name = "longitude", columnDefinition = "double(10,2) DEFAULT 0 COMMENT '经度'", nullable = false)
     private Double longitude;
 
-    @FieldOrder(order = 10)
+    @FieldOrder(order = 11)
     @Column(name = "latitude", columnDefinition = "double(10,2) DEFAULT 0 COMMENT '纬度'", nullable = false)
     private Double latitude;
 
-    @FieldOrder(order = 11)
+    @FieldOrder(order = 12)
     @Column(name = "imei", columnDefinition = "varchar(32) DEFAULT '' COMMENT 'IMEI'", nullable = false)
     private String imei;
 
-    @FieldOrder(order = 14)
+    @FieldOrder(order = 13)
     @Column(name = "gmt_create", columnDefinition = "bigint(11) DEFAULT 0 COMMENT '创建时间'", nullable = false)
     private Long gmtCreate;
 
