@@ -3,12 +3,14 @@ package com.sparrow.article.controller;
 import com.sparrow.article.protocol.param.PublishParam;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
 import com.sparrow.article.protocol.vo.ColumnVO;
+import com.sparrow.article.service.ArticleService;
 import com.sparrow.protocol.Result;
 import com.sparrow.article.protocol.vo.ArticleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +18,13 @@ import java.util.List;
 @RequestMapping("article")
 @Api(value = "文章系统", tags = "文章系统")
 public class ArticleController {
+    @Inject
+    private ArticleService articleService;
+
     @PostMapping("publish")
     @ApiOperation("发布")
     public Result<Boolean> publish(@RequestBody PublishParam publishParam) {
+        this.articleService.publish(publishParam);
         return new Result<>(true);
     }
 

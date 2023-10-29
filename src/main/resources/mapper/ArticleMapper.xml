@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sparrow.article.dao.ArticleDao">
+    <resultMap type="com.sparrow.article.po.Article" id="ArticleMap">
+        <result property="id" column="id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="columnId" column="column_id"/>
+        <result property="title" column="title"/>
+        <result property="abstracts" column="abstracts"/>
+        <result property="coverImage" column="cover_image"/>
+        <result property="abstracts" column="abstracts"/>
+        <result property="tags" column="tags"/>
+        <result property="viewCount" column="view_count"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="dislikeCount" column="dislike_count"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="status" column="status"/>
+        <result property="createUserName" column="create_user_name"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="modifiedUserId" column="modified_user_id"/>
+        <result property="modifiedUserName" column="modified_user_name"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.sparrow.article.po.Article">
+        insert into article (category_id,
+                             column_id,
+                             title,
+                             abstracts,
+                             tags,
+                             view_count,
+                             like_count,
+                             dislike_count,
+                             audit_status,
+                             status,
+                             create_user_name,
+                             create_user_id,
+                             modified_user_id,
+                             modified_user_name,
+                             gmt_create,
+                             gmt_modified)
+        values (#{categoryId},
+                #{columnId},
+                #{title},
+                #{abstracts},
+                #{tags},
+                0,
+                0,
+                0,
+                0,
+                0,
+                #{createUserName},
+                #{createUserId},
+                #{modifiedUserId},
+                #{modifiedUserName},
+                #{gmtCreate},
+                #{gmtModified})
+    </insert>
+
+    <select id="getEntity" parameterType="java.lang.Long" resultMap="ArticleMap">
+        SELECT *
+        FROM article
+        WHERE ID = #{id}
+    </select>
+</mapper>
+

@@ -1,6 +1,7 @@
 package com.sparrow.boot;
 
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -11,8 +12,10 @@ import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 @SpringBootApplication(scanBasePackages = "com.sparrow.*")
+@MapperScan(basePackages = "com.sparrow.article.dao")
 public class ApplicationBoot {
     private static Logger log = LoggerFactory.getLogger(ApplicationBoot.class);
+
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(ApplicationBoot.class);
 
