@@ -14,11 +14,9 @@
     <table path="sparrow.reply_comment">
       <table path="sparrow.reply_comment" from="id" to="reply_comment_id"/>
     </table>
-
     <table path="sparrow.reply_comment">
       <table path="sparrow.user" from="create_user_id" to="user_id"/>
     </table>
-
     <table path="sparrow.article">
       <table path="sparrow.tag" from="tags" to="id"/>
     </table>
