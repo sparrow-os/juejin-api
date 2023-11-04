@@ -5,3 +5,4 @@ lib
 classes
 logs
 *.jar
+mathjax/node_modules
