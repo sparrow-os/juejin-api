@@ -2,11 +2,14 @@ package com.sparrow.article.controller;
 
 import com.sparrow.article.po.Article;
 import com.sparrow.article.protocol.param.PublishParam;
+import com.sparrow.article.protocol.query.UserArticleQuery;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
 import com.sparrow.article.service.ArticleService;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.article.protocol.vo.ArticleVO;
+import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.Result;
+import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.pager.PagerResult;
 import com.sparrow.protocol.pager.SimplePager;
 import io.swagger.annotations.Api;
@@ -30,6 +33,11 @@ public class ArticleController {
     @PostMapping("publish")
     @ApiOperation("发布")
     public Boolean publish(@RequestBody PublishParam publishParam) throws BusinessException {
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUserId(1L);
+        loginUser.setUserName("harry");
+        loginUser.setNickName("harry");
+        ThreadContext.bindLoginToken(loginUser);
         this.articleService.publish(publishParam);
         return Boolean.TRUE;
     }
@@ -41,11 +49,15 @@ public class ArticleController {
         return true;
     }
 
-    @GetMapping("my")
+    @GetMapping("user")
     @ApiOperation("我的文章")
-    public PagerResult<AbstractArticleVO> my(SimplePager pager) {
-        PagerResult<AbstractArticleVO> pagerResult = this.articleService.my(pager);
-        return pagerResult;
+    public PagerResult<AbstractArticleVO> userArticleList(UserArticleQuery pager) {
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUserId(1L);
+        loginUser.setUserName("harry");
+        loginUser.setNickName("harry");
+        ThreadContext.bindLoginToken(loginUser);
+        return this.articleService.userArticleList(pager);
     }
 
     @GetMapping("published")
