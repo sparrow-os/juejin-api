@@ -2,14 +2,17 @@ package com.sparrow.article.controller;
 
 import com.sparrow.article.protocol.param.PublishParam;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
-import com.sparrow.article.protocol.vo.ColumnVO;
 import com.sparrow.article.service.ArticleService;
-import com.sparrow.protocol.Result;
+import com.sparrow.protocol.BusinessException;
 import com.sparrow.article.protocol.vo.ArticleVO;
+import com.sparrow.protocol.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +26,16 @@ public class ArticleController {
 
     @PostMapping("publish")
     @ApiOperation("发布")
-    public Result<Boolean> publish(@RequestBody PublishParam publishParam) {
+    public Boolean publish(@RequestBody PublishParam publishParam) throws BusinessException {
         this.articleService.publish(publishParam);
-        return new Result<>(true);
+        return Boolean.TRUE;
     }
 
 
     @PostMapping(value = "draft")
     @ApiOperation("保存草稿")
-    public Result<Boolean> draft(@RequestBody String content) {
-        return new Result<>(true);
+    public Boolean draft(@RequestBody String content) {
+        return true;
     }
 
     @GetMapping("my")
