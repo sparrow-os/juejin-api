@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sparrow.tag.admin.dao.TagDAO">
+    <resultMap id="TagMap" type="com.sparrow.tag.po.Tag">
+        <id column="id" property="id"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="front_color" property="frontColor"/>
+        <result column="background_color" property="background"/>
+        <result column="weight" property="weight"/>
+        <result column="status" property="status"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="modified_user_id" property="modifiedUserId"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="modified_user_name" property="modifiedUserName"/>
+    </resultMap>
+    <sql id="fields">
+        `id`
+        ,
+`tag_name`,
+`front_color`,
+`background_color`,
+`weight`,
+`status`,
+`create_user_id`,
+`gmt_create`,
+`modified_user_id`,
+`gmt_modified`,
+`create_user_name`,
+`modified_user_name`
+    </sql>
+    <insert id="insert" parameterType="com.sparrow.tag.po.Tag" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into `tag`(`tag_name`,
+                          `front_color`,
+                          `background_color`,
+                          `weight`,
+                          `status`,
+                          `create_user_id`,
+                          `gmt_create`,
+                          `modified_user_id`,
+                          `gmt_modified`,
+                          `create_user_name`,
+                          `modified_user_name`)
+        values (#{tagName},
+                #{frontColor},
+                #{background},
+                #{weight},
+                #{status},
+                #{createUserId},
+                #{gmtCreate},
+                #{modifiedUserId},
+                #{gmtModified},
+                #{createUserName},
+                #{modifiedUserName})</insert>
+    <update id="update" parameterType="com.sparrow.tag.po.Tag">
+        update `tag`
+        set `tag_name`=#{tagName},
+            `front_color`=#{frontColor},
+            `background_color`=#{background},
+            `weight`=#{weight},
+            `modified_user_id`=#{modifiedUserId},
+            `gmt_modified`=#{gmtModified},
+            `create_user_name`=#{createUserName},
+            `modified_user_name`=#{modifiedUserName}
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="java.lang.Long">
+        delete
+        from `tag`
+        where id = #{id}
+    </delete>
+    <select id="getEntity" resultMap="TagMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="fields"/>
+        FROM
+        tag
+        WHERE id= #{id}
+    </select>
+    <update id="changeStatus" parameterType="com.sparrow.protocol.dao.StatusCriteria">
+        update `tag` set `status`=#{status},
+        `modified_user_name`=#{modifiedUserName},
+        `modified_user_id`=#{modifiedUserId},
+        `gmt_modified`=#{gmtModified} WHERE id IN
+        <foreach collection="idArray" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

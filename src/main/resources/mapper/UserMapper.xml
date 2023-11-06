@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sparrow.passport.admin.dao.UserDAO">
+    <resultMap id="UserMap" type="com.sparrow.passport.po.User">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="gender" property="gender"/>
+        <result column="avatar" property="avatar"/>
+        <result column="nationality" property="nationality"/>
+        <result column="personal_signature" property="personalSignature"/>
+        <result column="birthday" property="birthday"/>
+        <result column="mobile" property="mobile"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="activate" property="activate"/>
+        <result column="activate_time" property="activateTime"/>
+        <result column="channel" property="channel"/>
+        <result column="device" property="device"/>
+        <result column="device_id" property="deviceId"/>
+        <result column="device_model" property="deviceModel"/>
+        <result column="ip" property="ip"/>
+        <result column="status" property="status"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+    <sql id="fields">
+        `user_id`
+        ,
+`user_name`,
+`nick_name`,
+`email`,
+`password`,
+`gender`,
+`avatar`,
+`nationality`,
+`personal_signature`,
+`birthday`,
+`mobile`,
+`last_login_time`,
+`activate`,
+`activate_time`,
+`channel`,
+`device`,
+`device_id`,
+`device_model`,
+`ip`,
+`status`,
+`gmt_create`,
+`gmt_modified`
+    </sql>
+    <insert id="insert" parameterType="com.sparrow.passport.po.User" useGeneratedKeys="true" keyColumn="user_id"
+            keyProperty="userId">
+        insert into `user`(`user_name`,
+                           `nick_name`,
+                           `email`,
+                           `password`,
+                           `gender`,
+                           `avatar`,
+                           `nationality`,
+                           `personal_signature`,
+                           `birthday`,
+                           `mobile`,
+                           `last_login_time`,
+                           `activate`,
+                           `activate_time`,
+                           `channel`,
+                           `device`,
+                           `device_id`,
+                           `device_model`,
+                           `ip`,
+                           `status`,
+                           `gmt_create`,
+                           `gmt_modified`)
+        values (#{userName},
+                #{nickName},
+                #{email},
+                #{password},
+                #{gender},
+                #{avatar},
+                #{nationality},
+                #{personalSignature},
+                #{birthday},
+                #{mobile},
+                #{lastLoginTime},
+                #{activate},
+                #{activateTime},
+                #{channel},
+                #{device},
+                #{deviceId},
+                #{deviceModel},
+                #{ip},
+                #{status},
+                #{gmtCreate},
+                #{gmtModified})</insert>
+    <update id="update" parameterType="com.sparrow.passport.po.User">
+        update `user`
+        set `nick_name`=#{nickName},
+            `gender`=#{gender},
+            `personal_signature`=#{personalSignature},
+            `birthday`=#{birthday},
+            `gmt_modified`=#{gmtModified}
+        where user_id = #{userId}
+    </update>
+    <delete id="delete" parameterType="java.lang.Long">
+        delete
+        from `user`
+        where user_id = #{userId}
+    </delete>
+    <select id="getEntity" resultMap="UserMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="fields"/>
+        FROM
+        user
+        WHERE user_id= #{userId}
+    </select>
+    <update id="changeStatus" parameterType="com.sparrow.protocol.dao.StatusCriteria">
+        update `user` set `status`=#{status},
+        `modified_user_name`=#{modifiedUserName},
+        `modified_user_id`=#{modifiedUserId},
+        `gmt_modified`=#{gmtModified} WHERE id IN
+        <foreach collection="idArray" item="id" index="index" open="(" close=")" separator=",">
+            #{user_id}
+        </foreach>
+    </update>
+</mapper>
