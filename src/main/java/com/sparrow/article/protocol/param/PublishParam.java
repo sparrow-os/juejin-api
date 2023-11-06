@@ -18,7 +18,7 @@ public class PublishParam {
     @ApiModelProperty("封面图")
     private String coverImage;
     @ApiModelProperty("专栏")
-    private Long column;
+    private Long columnId;
     @ApiModelProperty("摘要")
     private String abstracts;
 
@@ -70,12 +70,12 @@ public class PublishParam {
         this.coverImage = coverImage;
     }
 
-    public Long getColumn() {
-        return column;
+    public Long getColumnId() {
+        return columnId;
     }
 
-    public void setColumn(Long column) {
-        this.column = column;
+    public void setColumnId(Long column) {
+        this.columnId = column;
     }
 
     public String getAbstracts() {

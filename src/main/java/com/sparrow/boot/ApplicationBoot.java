@@ -1,6 +1,8 @@
 package com.sparrow.boot;
 
 
+import com.sparrow.article.commons.Singleton;
+import com.sparrow.protocol.Result;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

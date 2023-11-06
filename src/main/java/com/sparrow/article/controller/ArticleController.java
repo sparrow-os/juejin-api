@@ -1,16 +1,24 @@
 package com.sparrow.article.controller;
 
+import com.sparrow.article.po.Article;
 import com.sparrow.article.protocol.param.PublishParam;
+import com.sparrow.article.protocol.query.UserArticleQuery;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
-import com.sparrow.article.protocol.vo.ColumnVO;
 import com.sparrow.article.service.ArticleService;
-import com.sparrow.protocol.Result;
+import com.sparrow.protocol.BusinessException;
 import com.sparrow.article.protocol.vo.ArticleVO;
+import com.sparrow.protocol.LoginUser;
+import com.sparrow.protocol.Result;
+import com.sparrow.protocol.ThreadContext;
+import com.sparrow.protocol.pager.PagerResult;
+import com.sparrow.protocol.pager.SimplePager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,39 +32,32 @@ public class ArticleController {
 
     @PostMapping("publish")
     @ApiOperation("发布")
-    public Result<Boolean> publish(@RequestBody PublishParam publishParam) {
+    public Boolean publish(@RequestBody PublishParam publishParam) throws BusinessException {
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUserId(1L);
+        loginUser.setUserName("harry");
+        loginUser.setNickName("harry");
+        ThreadContext.bindLoginToken(loginUser);
         this.articleService.publish(publishParam);
-        return new Result<>(true);
+        return Boolean.TRUE;
     }
 
 
     @PostMapping(value = "draft")
     @ApiOperation("保存草稿")
-    public Result<Boolean> draft(@RequestBody String content) {
-        return new Result<>(true);
+    public Boolean draft(@RequestBody String content) {
+        return true;
     }
 
-    @GetMapping("my")
+    @GetMapping("user")
     @ApiOperation("我的文章")
-    public List<AbstractArticleVO> my() {
-
-        List<AbstractArticleVO> abstractArticles = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            AbstractArticleVO abstractArticle = new AbstractArticleVO();
-            abstractArticle.setId((long) i);
-            abstractArticle.setTitle("标题" + i);
-            abstractArticle.setAbstracts("摘要");
-            abstractArticle.setCreateUserName("创建人");
-            abstractArticle.setCreateUserId(0L);
-            abstractArticle.setLikeCount(0);
-            abstractArticle.setDislikeCount(0);
-            abstractArticle.setTags("JAVA .NET");
-            abstractArticle.setCoverImage("图片");
-            abstractArticle.setViewCount(0);
-            abstractArticle.setCreateTime(0L);
-            abstractArticles.add(abstractArticle);
-        }
-        return abstractArticles;
+    public PagerResult<AbstractArticleVO> userArticleList(UserArticleQuery pager) {
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUserId(1L);
+        loginUser.setUserName("harry");
+        loginUser.setNickName("harry");
+        ThreadContext.bindLoginToken(loginUser);
+        return this.articleService.userArticleList(pager);
     }
 
     @GetMapping("published")

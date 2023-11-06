@@ -62,5 +62,18 @@
         FROM article
         WHERE ID = #{id}
     </select>
+    <!--https://mybatis.net.cn/dynamic-sql.html-->
+    <select id="userArticleList" parameterType="com.sparrow.article.dao.query.UserArticleDBQuery" resultMap="ArticleMap">
+        select
+        id,title,abstracts,tags,cover_image,
+        gmt_create,gmt_modified,like_count,dislike_count,view_count,
+        create_user_id,create_user_name
+        from article
+        <where>
+            create_user_id=#{userId} and
+            ((status=1 and audit_status=1) or create_user_id =#{accessUserId})
+        </where>
+        ${limit}
+    </select>
 </mapper>
 
