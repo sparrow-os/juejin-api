@@ -1,24 +1,18 @@
 package com.sparrow.article.controller;
 
-import com.sparrow.article.po.Article;
 import com.sparrow.article.protocol.param.PublishParam;
 import com.sparrow.article.protocol.query.UserArticleQuery;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
+import com.sparrow.article.protocol.vo.ArticleVO;
 import com.sparrow.article.service.ArticleService;
 import com.sparrow.protocol.BusinessException;
-import com.sparrow.article.protocol.vo.ArticleVO;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.Result;
 import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.pager.PagerResult;
-import com.sparrow.protocol.pager.SimplePager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +26,8 @@ public class ArticleController {
 
     @PostMapping("publish")
     @ApiOperation("发布")
-    public Boolean publish(@RequestBody PublishParam publishParam) throws BusinessException {
-        LoginUser loginUser = new LoginUser();
-        loginUser.setUserId(1L);
-        loginUser.setUserName("harry");
-        loginUser.setNickName("harry");
-        ThreadContext.bindLoginToken(loginUser);
+    public Boolean publish(@RequestBody PublishParam publishParam,LoginUser loginUser) throws BusinessException {
+
         this.articleService.publish(publishParam);
         return Boolean.TRUE;
     }
@@ -51,13 +41,14 @@ public class ArticleController {
 
     @GetMapping("user")
     @ApiOperation("我的文章")
-    public PagerResult<AbstractArticleVO> userArticleList(UserArticleQuery pager) {
+    public PagerResult<AbstractArticleVO> userArticleList(UserArticleQuery userArticleQuery) throws BusinessException {
+        //filter
         LoginUser loginUser = new LoginUser();
         loginUser.setUserId(1L);
         loginUser.setUserName("harry");
         loginUser.setNickName("harry");
         ThreadContext.bindLoginToken(loginUser);
-        return this.articleService.userArticleList(pager);
+        return this.articleService.userArticleList(userArticleQuery);
     }
 
     @GetMapping("published")
