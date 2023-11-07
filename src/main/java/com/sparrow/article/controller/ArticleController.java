@@ -26,8 +26,7 @@ public class ArticleController {
 
     @PostMapping("publish")
     @ApiOperation("发布")
-    public Boolean publish(@RequestBody PublishParam publishParam,LoginUser loginUser) throws BusinessException {
-
+    public Boolean publish(@RequestBody PublishParam publishParam) throws BusinessException {
         this.articleService.publish(publishParam);
         return Boolean.TRUE;
     }
