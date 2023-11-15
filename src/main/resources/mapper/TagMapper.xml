@@ -52,7 +52,8 @@
                 #{modifiedUserId},
                 #{gmtModified},
                 #{createUserName},
-                #{modifiedUserName})</insert>
+                #{modifiedUserName})
+    </insert>
     <update id="update" parameterType="com.sparrow.tag.po.Tag">
         update `tag`
         set `tag_name`=#{tagName},

@@ -41,7 +41,7 @@
     </typeHandlers>
     <plugins>
         <!-- SQL性能拦截器 -->
-        <plugin interceptor="com.sparrow.commons.PerformanceInterceptor"/>
+        <plugin interceptor="com.sparrow.commons.MyPerformanceInterceptor"/>
     </plugins>
     <mappers>
 
