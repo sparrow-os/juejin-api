@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("article")
 @Api(value = "文章系统", tags = "文章系统")
 public class ArticleController {
-    @Autowired
+    @Inject
     private ArticleService articleService;
 
     @PostMapping("publish")

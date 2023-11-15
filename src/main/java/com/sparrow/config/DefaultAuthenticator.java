@@ -20,21 +20,22 @@ public class DefaultAuthenticator implements Authenticator {
 
     private String getDecryptKey() {
         //todo 获取解密的密钥
+        return null;
     }
 
     private LoginUser verify(String token, String decryptKey) {
-
+        return null;
     }
 
     private LoginUserStatus getUserStatus(Long userId) {
-
+        return null;
     }
 
     private LoginUserStatus getUserStatusFromDB(Long userId) {
-
+        return null;
     }
 
-    private reneal(LoginUser loginUser,LoginUserStatus loginUserStatus){
+    private void reneal(LoginUser loginUser, LoginUserStatus loginUserStatus) {
 
     }
 
