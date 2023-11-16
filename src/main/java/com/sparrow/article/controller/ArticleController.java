@@ -9,6 +9,7 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.pager.PagerResult;
+import com.sparrow.spring.starter.SpringContext;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.List;
 @RequestMapping("article")
 @Api(value = "文章系统", tags = "文章系统")
 public class ArticleController {
+
     private final ArticleService articleService;
 
     @Autowired
@@ -51,6 +53,7 @@ public class ArticleController {
         loginUser.setUserName("harry");
         loginUser.setNickName("harry");
         ThreadContext.bindLoginToken(loginUser);
+        userArticleQuery.setUserId(1L);
         return this.articleService.userArticleList(userArticleQuery);
     }
 
