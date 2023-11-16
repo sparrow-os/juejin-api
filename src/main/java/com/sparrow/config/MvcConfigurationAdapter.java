@@ -1,12 +1,18 @@
 package com.sparrow.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * extends WebMvcConfigurationSupport 慎用，会将可默认的WebMvcAutoConfiguration  覆盖
- */
 @Configuration
-public class MvcConfigurationAdapter extends WebMvcConfigurationSupport {
+public class MvcConfigurationAdapter implements WebMvcConfigurer {
 
+
+//    @Value("${mock_login_user}")
+//    private Boolean mockUser;
+//
+//    @Inject
+//    private IpSupport ipSupport;
+//
+//    @Value("${authenticator.white.list}")
+//    private List<String> whiteList;
 }
