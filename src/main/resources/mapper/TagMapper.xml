@@ -66,6 +66,26 @@
             `modified_user_name`=#{modifiedUserName}
         where id = #{id}
     </update>
+
+
+
+    <select id="queryByLastId" resultMap="TagMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="fields"/>
+        FROM
+        tag
+        WHERE id> #{lastId} limit 0,10
+    </select>
+
+    <select id="queryByName" resultMap="TagMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="fields"/>
+        FROM
+        tag
+        WHERE `tag_name` like concat(#{tagName},'%')
+    </select>
+
+
     <delete id="delete" parameterType="java.lang.Long">
         delete
         from `tag`

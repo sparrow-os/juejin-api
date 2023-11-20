@@ -21,12 +21,14 @@ import com.sparrow.cryptogram.Base64;
 import com.sparrow.cryptogram.Hmac;
 import com.sparrow.exception.Asserts;
 import com.sparrow.json.Json;
+import com.sparrow.passport.dao.UserDAO;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.LoginUserStatus;
 import com.sparrow.support.AbstractAuthenticatorService;
 import com.sparrow.utility.StringUtility;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.inject.Named;
@@ -39,10 +41,13 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
 
     private Json json = JsonFactory.getProvider();
 
-    @Value("${auth.encrypt_key}")
+    @Value("${sparrow.auth.encrypt_key}")
     private String encryptKey;
 
     private volatile boolean loadedEnvEncrypt;
+
+    @Autowired
+    private UserDAO userDao;
 
     @Override
     protected String getEncryptKey() {
@@ -108,9 +113,8 @@ public class AuthenticatorService extends AbstractAuthenticatorService {
 
     @Override
     protected LoginUserStatus getUserStatusFromDB(Long userId) {
-        //SecurityPrincipalEntity securityPrincipal = this.domainRegistry.getSecurityPrincipalRepository().findByUserId(userId);
-        //return new LoginUserStatus(securityPrincipal.getStatus(), 0L);
-        return null;
+        Integer status = this.userDao.getStatus(userId);
+        return new LoginUserStatus(status, 0L);
     }
 
     @Override
