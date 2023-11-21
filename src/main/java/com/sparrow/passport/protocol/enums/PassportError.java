@@ -31,9 +31,9 @@ public enum PassportError implements ErrorSupport {
     USER_TOKEN_ERROR(false, PassportModule.USER, "24", "user token error"),
     USER_IDS_IS_EMPTY(false, PassportModule.USER, "25", "user id is empty"),
     USER_AVATAR_CAN_NOT_DEFAULT(false, PassportModule.USER, "26", "please upload avatar"),
-    USER_REGISTER_EMAIL_F0RMAT_ERROR(false, PassportModule.USER, "19", "user email format error"),
-    USER_REGISTER_USER_NAME_F0RMAT_ERROR(false, PassportModule.USER, "19", "user name format error"),
-    USER_REGISTER_PASSWORD_NOT_MATCH(false, PassportModule.USER, "19", "user password not match"),
+    USER_REGISTER_EMAIL_FORMAT_ERROR(false, PassportModule.USER, "27", "user email format error"),
+    USER_REGISTER_USER_NAME_FORMAT_ERROR(false, PassportModule.USER, "28", "user name format error"),
+    USER_REGISTER_PASSWORD_NOT_CONFORM(false, PassportModule.USER, "29", "user password not match"),
 
 
     ;

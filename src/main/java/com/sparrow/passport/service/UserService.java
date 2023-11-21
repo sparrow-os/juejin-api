@@ -1,5 +1,6 @@
 package com.sparrow.passport.service;
 
+import com.sparrow.constant.Regex;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.assembler.UserAssembler;
 import com.sparrow.passport.dao.UserDAO;
@@ -7,11 +8,13 @@ import com.sparrow.passport.po.User;
 import com.sparrow.passport.protocol.enums.PassportError;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.passport.protocol.query.LoginQuery;
+import com.sparrow.passport.support.PassportRegex;
 import com.sparrow.protocol.*;
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.support.Authenticator;
+import com.sparrow.utility.RegexUtility;
 import com.sparrow.utility.StringUtility;
 
 import javax.inject.Inject;
@@ -72,14 +75,16 @@ public class UserService {
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getEmail()), PassportError.USER_REGISTER_EMAIL_NULL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getUserName()), PassportError.USER_REGISTER_NAME_NULL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getPassword()), PassportError.USER_PASSWORD_ERROR);
-        //Asserts.isTrue(PassportError.USER_REGISTER_EMAIL_F0RMAT_ERROR);;
-        //Asserts.isTrue(PassportError.USER_REGISTER_USER_NAME_F0RMAT_ERROR);
-        //Asserts.isTrue(PassportError.USER_PASSWORD_FORMAT_ERROR);
-        Asserts.isTrue(registerParam.getPassword().equals(registerParam.getPasswordConfirm()), PassportError.USER_REGISTER_PASSWORD_NOT_MATCH);
+        Asserts.isTrue(!RegexUtility.matches(registerParam.getPassword(), Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR);
+        Asserts.isTrue(!RegexUtility.matches(registerParam.getPasswordConfirm(), Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR);
+        Asserts.isTrue(!RegexUtility.matches(registerParam.getUserName(), PassportRegex.USER_NAME), PassportError.USER_REGISTER_USER_NAME_FORMAT_ERROR);
+        Asserts.isTrue(!RegexUtility.matches(registerParam.getEmail(), PassportRegex.EMAIL), PassportError.USER_REGISTER_EMAIL_FORMAT_ERROR);
+
+        Asserts.isTrue(!registerParam.getPassword().equals(registerParam.getPasswordConfirm()), PassportError.USER_REGISTER_PASSWORD_NOT_CONFORM);
         User existUserName = this.userDao.getUserByName(registerParam.getUserName());
-        Asserts.isTrue(existUserName == null, PassportError.USER_NAME_EXIST);
+        Asserts.isTrue(existUserName != null, PassportError.USER_NAME_EXIST);
         User existEmail = this.userDao.getUserByEmail(registerParam.getEmail());
-        Asserts.isTrue(existEmail == null, PassportError.USER_EMAIL_EXIST);
+        Asserts.isTrue(existEmail != null, PassportError.USER_EMAIL_EXIST);
         String encryptionPassword = this.encryptionService.encryptPassword(registerParam.getPassword());
         User user = this.userAssembler.assemblerUser(registerParam, encryptionPassword);
         this.userDao.insert(user);
