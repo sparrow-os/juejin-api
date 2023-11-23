@@ -1,11 +1,8 @@
 package com.sparrow.config;
 
-import com.sparrow.constant.Config;
-import com.sparrow.protocol.constant.Constant;
 import com.sparrow.support.Authenticator;
 import com.sparrow.support.IpSupport;
 import com.sparrow.support.web.MonolithicLoginUserFilter;
-import com.sparrow.utility.ConfigUtility;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
