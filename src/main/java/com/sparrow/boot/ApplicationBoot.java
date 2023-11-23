@@ -12,7 +12,7 @@ import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 @SpringBootApplication(scanBasePackages = "com.sparrow.*")
-@MapperScan(basePackages = "com.sparrow.article.dao")
+@MapperScan(basePackages = {"com.sparrow.article.dao", "com.sparrow.passport.dao", "com.sparrow.tag.dao"})
 public class ApplicationBoot {
     private static Logger log = LoggerFactory.getLogger(ApplicationBoot.class);
 
