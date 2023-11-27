@@ -24,12 +24,6 @@ public class ArticleAssembler {
             article.setTags(Arrays.toString(publishParam.getTags()));
         }
         //todo 需要到后台check标签是否存在，防止非法用户请求
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                LoginUser loginUser=ThreadContext.getLoginToken();
-            }
-        }).start();
         //标签的优化
         article.setTags(Arrays.toString(publishParam.getTags()));
         //上下文的用户信息

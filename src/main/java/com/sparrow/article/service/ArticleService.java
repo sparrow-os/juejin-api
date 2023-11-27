@@ -2,8 +2,8 @@ package com.sparrow.article.service;
 
 import com.sparrow.article.assembler.ArticleAssembler;
 import com.sparrow.article.dao.ArticleDao;
-import com.sparrow.article.po.Article;
 import com.sparrow.article.dao.query.UserArticleDBQuery;
+import com.sparrow.article.po.Article;
 import com.sparrow.article.protocol.param.PublishParam;
 import com.sparrow.article.protocol.query.UserArticleQuery;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
@@ -13,22 +13,18 @@ import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.constant.magic.Digit;
-import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.pager.PagerResult;
-import com.sparrow.protocol.pager.SimplePager;
 import com.sparrow.utility.StringUtility;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class ArticleService {
     @Inject
     private ArticleDao articleDao;
+    
     @Inject
     private ArticleAssembler articleAssembler;
 
