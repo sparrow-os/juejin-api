@@ -24,32 +24,28 @@
 `modified_user_name`
 </sql>
 <insert id="insert" parameterType="com.sparrow.article.po.ArticleDetail">
-<selectKey keyProperty="id" keyColumn="id"  order="BEFORE" resultType="java.lang.String">
-select UUID()
-</selectKey>
-insert into `article_detail`(
-`id`,
-`content`,
-`status`,
-`create_user_id`,
-`gmt_create`,
-`modified_user_id`,
-`gmt_modified`,
-`create_user_name`,
-`modified_user_name`)values(
-#{id},
-#{content},
-#{status},
-#{createUserId},
-#{gmtCreate},
-#{modifiedUserId},
-#{gmtModified},
-#{createUserName},
-#{modifiedUserName})
+ insert into `article_detail`(`id`,
+                              `content`,
+                              `status`,
+                              `create_user_id`,
+                              `gmt_create`,
+                              `modified_user_id`,
+                              `gmt_modified`,
+                              `create_user_name`,
+                              `modified_user_name`)
+ values (#{id},
+         #{content},
+         #{status},
+         #{createUserId},
+         #{gmtCreate},
+         #{modifiedUserId},
+         #{gmtModified},
+         #{createUserName},
+         #{modifiedUserName})
 </insert>
- 
+
 <update id="update" parameterType="com.sparrow.article.po.ArticleDetail">
-update `article_detail` set 
+update `article_detail` set
 `content`=#{content},
 `status`=#{status},
 `modified_user_id`=#{modifiedUserId},
@@ -61,9 +57,9 @@ update `article_detail` set
 delete from `article_detail` where id=#{id}
 </delete>
 <select id="getEntity" resultMap="ArticleDetailMap" parameterType="java.lang.Long">
- SELECT 
+ SELECT
 <include refid="fields"/>
- FROM 
+ FROM
 article_detail
 WHERE id= #{id}
 </select>

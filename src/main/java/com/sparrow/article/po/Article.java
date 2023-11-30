@@ -62,7 +62,7 @@ public class Article extends PO {
     private Integer auditStatus;
 
     @Column(name = "status",
-            columnDefinition = "tinyint(1)  DEFAULT 0 COMMENT '状态'",
+            columnDefinition = "tinyint(1)  DEFAULT 0 COMMENT '状态0:草搞，1:发布'",
             nullable = false, updatable = false)
     private Integer status;
 
