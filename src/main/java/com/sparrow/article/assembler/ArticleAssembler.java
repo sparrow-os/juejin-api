@@ -1,8 +1,10 @@
 package com.sparrow.article.assembler;
 
 import com.sparrow.article.po.Article;
+import com.sparrow.article.po.ArticleDetail;
 import com.sparrow.article.protocol.param.PublishParam;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
+import com.sparrow.article.protocol.vo.ArticleVO;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.ThreadContext;
 import com.sparrow.utility.CollectionsUtility;
@@ -15,6 +17,22 @@ import java.util.List;
 
 @Component
 public class ArticleAssembler {
+    public ArticleDetail assembleDetail(PublishParam publishParam, Long articleId) {
+        ArticleDetail articleDetail = new ArticleDetail();
+        articleDetail.setContent(publishParam.getContent());
+        articleDetail.setId(articleId);
+        //上下文的用户信息
+        LoginUser loginUser = ThreadContext.getLoginToken();
+        //需要手动设置
+        articleDetail.setCreateUserName(loginUser.getUserName());
+        articleDetail.setCreateUserId(loginUser.getUserId());
+        articleDetail.setModifiedUserId(loginUser.getUserId());
+        articleDetail.setModifiedUserName(loginUser.getUserName());
+        articleDetail.setGmtCreate(System.currentTimeMillis());
+        articleDetail.setGmtModified(System.currentTimeMillis());
+        return articleDetail;
+    }
+
     public Article assembleArticle(PublishParam publishParam) {
         Article article = new Article();
         BeanUtils.copyProperties(publishParam, article);
@@ -23,13 +41,6 @@ public class ArticleAssembler {
         } else {
             article.setTags(Arrays.toString(publishParam.getTags()));
         }
-        //todo 需要到后台check标签是否存在，防止非法用户请求
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                LoginUser loginUser=ThreadContext.getLoginToken();
-            }
-        }).start();
         //标签的优化
         article.setTags(Arrays.toString(publishParam.getTags()));
         //上下文的用户信息
@@ -42,6 +53,13 @@ public class ArticleAssembler {
         article.setGmtCreate(System.currentTimeMillis());
         article.setGmtModified(System.currentTimeMillis());
         return article;
+    }
+
+    public ArticleVO assembleArticle(Article article, ArticleDetail detail) {
+        ArticleVO articleVo = new ArticleVO();
+        BeanUtils.copyProperties(article, articleVo);
+        BeanUtils.copyProperties(detail, articleVo);
+        return articleVo;
     }
 
     public List<AbstractArticleVO> assembleList(List<Article> articles) {

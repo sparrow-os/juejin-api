@@ -1,5 +1,6 @@
 package com.sparrow.recommend.controller;
 
+import com.sparrow.article.service.ArticleService;
 import com.sparrow.recommend.protocol.vo.AbstractArticleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +16,8 @@ import java.util.List;
 @RestController
 @Api(value = "推荐系统", tags = "推荐系统")
 public class CommendController {
+
+    private ArticleService articleService;
 
     @ApiOperation("推荐")
     @GetMapping("recommend")
@@ -35,27 +38,6 @@ public class CommendController {
         }
         return abstractArticles;
     }
-
-    @ApiOperation("最新")
-    @GetMapping("recommend/newest")
-    public List<AbstractArticleVO> newest() {
-        List<AbstractArticleVO> abstractArticles = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            AbstractArticleVO abstractArticle = new AbstractArticleVO();
-            abstractArticle.setId((long) i);
-            abstractArticle.setTitle("文章标题");
-            abstractArticle.setAbstracts("文章摘要");
-            abstractArticle.setCreateUserId(1L);
-            abstractArticle.setCreateUserName("张三" + i);
-            abstractArticle.setLikeCount(i);
-            abstractArticle.setDislikeCount(i);
-            abstractArticle.setTags("JAVA,.NET JS ASP.NET");
-            abstractArticle.setCoverImage("http://r.sparrowzoo.net/" + i + ".jpg");
-            abstractArticles.add(abstractArticle);
-        }
-        return abstractArticles;
-    }
-
     @ApiOperation("分类页")
     @GetMapping("recommend/category/{categoryId}")
     public List<AbstractArticleVO> category(@PathVariable("categoryId") Long categoryId) {
