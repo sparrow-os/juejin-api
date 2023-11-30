@@ -93,6 +93,48 @@
         ${limit}
     </select>
 
+
+    <select id="getArticles" resultMap="ArticleMap">
+        select id,
+               category_id,
+               title,
+               abstracts,
+               tags,
+               cover_image,
+               gmt_create,
+               gmt_modified,
+               like_count,
+               dislike_count,
+               view_count,
+               create_user_id,
+               create_user_name
+        from article
+        where status = 1
+          and audit_status = 1
+          and gmt_create > #{startTime} limit 200;
+    </select>
+
+    <select id="queryArticlesByCategory" resultMap="ArticleMap">
+        select id,
+               category_id,
+               title,
+               abstracts,
+               tags,
+               cover_image,
+               gmt_create,
+               gmt_modified,
+               like_count,
+               dislike_count,
+               view_count,
+               create_user_id,
+               create_user_name
+        from article
+        where status = 1
+          and audit_status = 1
+          and category_id = #{categoryId} limit 200;
+    </select>
+
+
     <select id="queryMyArticles" parameterType="com.sparrow.article.dao.query.UserArticleDBQuery"
             resultMap="ArticleMap">
         select
@@ -110,8 +152,8 @@
         ${limit}
     </select>
 
-    <select id="countMyArticles" parameterType="com.sparrow.article.dao.query.UserArticleDBQuery"
-            resultMap="java.lang.Long">
+    <select id="countMyArticle" parameterType="com.sparrow.article.dao.query.UserArticleDBQuery"
+            resultType="java.lang.Long">
         select
         count(*)
         from article

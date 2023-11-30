@@ -15,7 +15,6 @@ import java.util.List;
 public class ColumnsService {
     @Inject
     private ColumnDao columnDao;
-
     @Inject
     private ColumnsAssembler columnsAssembler;
 

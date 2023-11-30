@@ -1,9 +1,9 @@
 package com.sparrow.article.protocol.vo;
 
-import com.sparrow.recommend.protocol.vo.AbstractArticleVO;
+import com.sparrow.recommend.protocol.vo.RecommendArticleVO;
 import io.swagger.annotations.ApiModelProperty;
 
-public class ArticleVO extends AbstractArticleVO {
+public class ArticleVO extends RecommendArticleVO {
 
     @ApiModelProperty("创建人用户名")
     private String createUserName;

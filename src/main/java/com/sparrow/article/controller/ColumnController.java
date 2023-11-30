@@ -1,6 +1,5 @@
 package com.sparrow.article.controller;
 
-import com.sparrow.article.assembler.ColumnsAssembler;
 import com.sparrow.article.dao.ColumnDao;
 import com.sparrow.article.po.Columns;
 import com.sparrow.article.protocol.vo.ColumnVO;

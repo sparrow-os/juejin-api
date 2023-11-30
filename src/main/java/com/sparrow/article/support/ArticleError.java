@@ -15,7 +15,11 @@ public enum ArticleError implements ErrorSupport {
 
     ARTICLE_PAGE_SIZE_EXCEED(false, Modules.ARTICLE, "08", "page size exceed 100"),
 
-    ARTICLE_IS_NOT_FOUND(false, Modules.ARTICLE, "09", "article is not found");
+    ARTICLE_IS_NOT_FOUND(false, Modules.ARTICLE, "09", "article is not found"),
+
+    ARTICLE_PUBLISHED_TIMES_EXCEED(false, Modules.ARTICLE, "10", "article publish exceed times"),
+
+    ARTICLE_CATEGORY_NOT_FOUND(false, Modules.ARTICLE, "11", "article category not found");
 
 
     private boolean system;

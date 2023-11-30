@@ -19,7 +19,6 @@ import java.util.List;
 @Api(value = "交互系统", tags = "交互系统")
 public class CommentController {
 
-
     @PostMapping("comment")
     @ApiOperation("评论")
     public Result<Boolean> comment(@RequestBody CommentParam commentParam) {

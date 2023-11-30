@@ -19,6 +19,10 @@ public class CategoryService {
     @Inject
     private CategoryDao categoryDao;
 
+    public Boolean exist(Long categoryId) {
+        return this.categoryDao.exist(categoryId);
+    }
+
     public List<CategoryVO> categoryTree() {
         List<CategoryVO> categoryVOS = new ArrayList<>();
         CategoryVO root = CategoryVO.root();

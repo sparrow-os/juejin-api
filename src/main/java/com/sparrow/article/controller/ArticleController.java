@@ -75,7 +75,7 @@ public class ArticleController {
 
     @ApiOperation("详情")
     @GetMapping("details")
-    public ArticleVO detail(Long articleId) {
+    public ArticleVO detail(Long articleId) throws BusinessException {
         return this.articleService.detail(articleId);
     }
 }

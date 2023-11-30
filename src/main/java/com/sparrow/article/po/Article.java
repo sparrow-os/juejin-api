@@ -56,6 +56,16 @@ public class Article extends PO {
             nullable = false, updatable = false)
     private Integer dislikeCount;
 
+    @Column(name = "fav_count",
+            columnDefinition = "int(11)  DEFAULT 0 COMMENT '收藏数'",
+            nullable = false, updatable = false)
+    private Integer favCount;
+
+    @Column(name = "comment_count",
+            columnDefinition = "int(11)  DEFAULT 0 COMMENT '评论数'",
+            nullable = false, updatable = false)
+    private Integer commentCount;
+
     @Column(name = "audit_status",
             columnDefinition = "tinyint(1)  DEFAULT 0 COMMENT '审核状态'",
             nullable = false, updatable = false)
@@ -161,5 +171,21 @@ public class Article extends PO {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getFavCount() {
+        return favCount;
+    }
+
+    public void setFavCount(Integer favCount) {
+        this.favCount = favCount;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
     }
 }

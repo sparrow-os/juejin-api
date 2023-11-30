@@ -7,6 +7,7 @@ import com.sparrow.article.protocol.vo.AbstractArticleVO;
 import com.sparrow.article.protocol.vo.ArticleVO;
 import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.ThreadContext;
+import com.sparrow.recommend.protocol.vo.RecommendArticleVO;
 import com.sparrow.utility.CollectionsUtility;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -70,6 +71,19 @@ public class ArticleAssembler {
         List<AbstractArticleVO> abstractArticles = new ArrayList<>(articles.size());
         for (Article article : articles) {
             AbstractArticleVO abstractArticle = new AbstractArticleVO();
+            BeanUtils.copyProperties(article, abstractArticle);
+            abstractArticles.add(abstractArticle);
+        }
+        return abstractArticles;
+    }
+
+    public List<RecommendArticleVO> recommendAssembleList(List<Article> articles) {
+        if (CollectionsUtility.isNullOrEmpty(articles)) {
+            return null;
+        }
+        List<RecommendArticleVO> abstractArticles = new ArrayList<>(articles.size());
+        for (Article article : articles) {
+            RecommendArticleVO abstractArticle = new RecommendArticleVO();
             BeanUtils.copyProperties(article, abstractArticle);
             abstractArticles.add(abstractArticle);
         }

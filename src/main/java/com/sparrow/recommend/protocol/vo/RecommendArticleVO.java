@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("文章摘要列表")
-public class AbstractArticleVO {
+public class RecommendArticleVO {
     @ApiModelProperty("ID")
     private Long id;
     @ApiModelProperty("标题")
@@ -23,10 +23,18 @@ public class AbstractArticleVO {
     private Integer dislikeCount;
     @ApiModelProperty("展示数")
     private Integer viewCount;
+
+    @ApiModelProperty("收藏数")
+    private Integer favCount;
+    @ApiModelProperty("评论数")
+    private Integer commentCount;
     @ApiModelProperty("标签")
     private String tags;
     @ApiModelProperty("封面图")
     private String coverImage;
+
+    @ApiModelProperty("推荐评分")
+    private Double score;
 
     public Long getId() {
         return id;
@@ -114,5 +122,29 @@ public class AbstractArticleVO {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getFavCount() {
+        return favCount;
+    }
+
+    public void setFavCount(Integer favCount) {
+        this.favCount = favCount;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 }

@@ -85,6 +85,12 @@
         WHERE id= #{id}
     </select>
 
+    <select id="exist" resultType="java.lang.Boolean" parameterType="java.lang.Long">
+        SELECT count(id)
+        FROM category
+        WHERE id = #{id}
+    </select>
+
     <select id="allEnableList" resultMap="CategoryMap" parameterType="java.lang.Long">
         SELECT
         <include refid="fields"/>

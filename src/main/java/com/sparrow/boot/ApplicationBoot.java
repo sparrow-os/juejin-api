@@ -1,8 +1,6 @@
 package com.sparrow.boot;
 
 
-import com.alibaba.fastjson.JSON;
-import com.sparrow.json.Json;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +12,9 @@ import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 @SpringBootApplication(scanBasePackages = "com.sparrow.*")
-@MapperScan(basePackages = {"com.sparrow.article.dao", "com.sparrow.passport.dao", "com.sparrow.tag.dao"})
+@MapperScan(basePackages = {"com.sparrow.article.dao",
+        "com.sparrow.passport.dao",
+        "com.sparrow.tag.dao"})
 public class ApplicationBoot {
     private static Logger log = LoggerFactory.getLogger(ApplicationBoot.class);
 

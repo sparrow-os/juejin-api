@@ -4,6 +4,7 @@ import com.sparrow.article.dao.query.MyArticleDBQuery;
 import com.sparrow.article.po.Article;
 import com.sparrow.article.dao.query.UserArticleDBQuery;
 import com.sparrow.protocol.dao.DaoSupport;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface ArticleDao extends DaoSupport<Article, Long> {
 
     Long countMyArticle(MyArticleDBQuery myArticleDBQuery);
 
+    List<Article> getArticles(Long startTime);
+
+    List<Article> queryArticlesByCategory(Long categoryId);
 }
