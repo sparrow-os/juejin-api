@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-import sun.dc.pr.PRError;
 
 import javax.inject.Inject;
 
@@ -36,11 +35,12 @@ public class RedisTest {
         User user = new User();
         user.setUserName("lisi");
         redisTemplate.opsForValue().set("name", user);
-        //stringRedisTemplate.opsForValue().set("string-name", user);
+//        stringRedisTemplate.opsForValue().set("string-name", user);
         originRedisTemplate.opsForValue().set("origin-name", user);
 
         Long s = redisTemplate.opsForValue().increment("new2");
         redisTemplate.opsForValue().get("new");
         System.out.println("end");
+
     }
 }

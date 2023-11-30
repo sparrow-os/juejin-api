@@ -7,6 +7,9 @@ import com.sparrow.article.po.Article;
 import com.sparrow.article.protocol.param.PublishParam;
 import com.sparrow.article.protocol.query.UserArticleQuery;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
+import com.sparrow.article.redis.PlaceHolderParser;
+import com.sparrow.article.redis.PropertyAccessBuilder;
+import com.sparrow.article.redis.RedisKey;
 import com.sparrow.article.support.ArticleError;
 import com.sparrow.exception.Asserts;
 import com.sparrow.protocol.BusinessException;
@@ -14,7 +17,10 @@ import com.sparrow.protocol.LoginUser;
 import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.constant.magic.Digit;
 import com.sparrow.protocol.pager.PagerResult;
+import com.sparrow.spring.starter.redis.OperateLimiter;
 import com.sparrow.utility.StringUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -22,13 +28,30 @@ import java.util.List;
 
 @Service
 public class ArticleService {
+    private static Logger logger = LoggerFactory.getLogger(ArticleService.class);
     @Inject
     private ArticleDao articleDao;
-    
+
     @Inject
     private ArticleAssembler articleAssembler;
 
+    @Inject
+    private OperateLimiter operateLimiter;
+
     public void publish(PublishParam publishParam) throws BusinessException {
+        LoginUser current = ThreadContext.getLoginToken();
+
+        //published_{userId}==> published_1
+        String publishedLimitKey = PlaceHolderParser.parse(RedisKey.PUBLISHED_LIMIT_KEY, PropertyAccessBuilder.buildPublishLimitKey(current.getUserId()));
+        //用户ID 时间 次数 要不要续期？
+        boolean passed = this.operateLimiter.renewalLimit(publishedLimitKey, 5, 1000 * 60 * 5L);
+
+        if (!passed) {
+            logger.error("title {} current user Id {} is limited", publishParam.getTitle(), current.getUserId());
+            return;
+        }
+
+
         //这个代码比上边的代码要简洁
         Asserts.isTrue(StringUtility.isNullOrEmpty(publishParam.getTitle()), ArticleError.ARTICLE_TITLE_IS_NULL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(publishParam.getContent()), ArticleError.ARTICLE_CONTENT_IS_NULL);
