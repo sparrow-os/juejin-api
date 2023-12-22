@@ -25,6 +25,9 @@ public class UserAssembler {
         user.setEmail(registerParam.getEmail());
         user.setPassword(encryptionPassword);
         user.setChannel(clientInformation.getChannel());
+        if (user.getChannel() == null) {
+            user.setChannel(Symbol.EMPTY);
+        }
         user.setActivate(false);
         user.setActivateTime(0L);
         user.setBirthday(null);
@@ -42,6 +45,9 @@ public class UserAssembler {
         user.setMobile(Symbol.EMPTY);
         user.setStatus(1);
         user.setNickName(Symbol.EMPTY);
+        if (user.getDeviceModel() == null) {
+            user.setDeviceModel(Symbol.EMPTY);
+        }
         return user;
     }
 }

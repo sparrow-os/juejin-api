@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @Api(value = "标签系统", tags = "标签系统")
+@RequestMapping("tag")
 public class TagController {
     @Inject
     private TagService tagService;

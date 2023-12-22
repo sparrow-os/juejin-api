@@ -38,6 +38,9 @@ public class LoginQuery {
     }
 
     public Boolean getRemember() {
+        if (remember == null) {
+            return false;
+        }
         return remember;
     }
 

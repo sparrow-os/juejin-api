@@ -56,7 +56,7 @@ public class ArticleService {
         double likeWeight = 0.5;
         double favWeight = 0.2;
         double commentWeight = 0.3;
-        int hours = 48;
+        int hours = 48000000;
         long startTime = System.currentTimeMillis() - 1000 * 60 * 60 * hours;
         List<Article> articles = this.articleDao.getArticles(startTime);
         List<RecommendArticleVO> abstractArticles = this.articleAssembler.recommendAssembleList(articles);

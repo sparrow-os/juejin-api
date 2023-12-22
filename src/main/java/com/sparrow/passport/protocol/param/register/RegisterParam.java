@@ -8,7 +8,7 @@ public abstract class RegisterParam implements Param {
 
     protected String password;
 
-    protected String passwordConfirm;
+    protected String confirmPassword;
 
     protected String captcha;
 
@@ -16,17 +16,11 @@ public abstract class RegisterParam implements Param {
         return password;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
 
 
     public String getCaptcha() {
@@ -37,4 +31,11 @@ public abstract class RegisterParam implements Param {
         this.captcha = captcha;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 }

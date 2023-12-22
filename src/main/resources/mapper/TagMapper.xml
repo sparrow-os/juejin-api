@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sparrow.tag.admin.dao.TagDAO">
+<mapper namespace="com.sparrow.tag.dao.TagDao">
     <resultMap id="TagMap" type="com.sparrow.tag.po.Tag">
         <id column="id" property="id"/>
         <result column="tag_name" property="tagName"/>
