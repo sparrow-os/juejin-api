@@ -13,7 +13,6 @@ import com.sparrow.article.protocol.query.MyArticleQuery;
 import com.sparrow.article.protocol.query.UserArticleQuery;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
 import com.sparrow.article.protocol.vo.ArticleVO;
-import com.sparrow.article.redis.PlaceHolderParser;
 import com.sparrow.article.redis.PropertyAccessBuilder;
 import com.sparrow.article.redis.RedisKey;
 import com.sparrow.article.support.ArticleError;
@@ -26,6 +25,7 @@ import com.sparrow.protocol.constant.magic.Digit;
 import com.sparrow.protocol.pager.PagerResult;
 import com.sparrow.recommend.protocol.vo.RecommendArticleVO;
 import com.sparrow.spring.starter.redis.OperateLimiter;
+import com.sparrow.support.PlaceHolderParser;
 import com.sparrow.tag.service.CategoryService;
 import com.sparrow.utility.CollectionsUtility;
 import com.sparrow.utility.StringUtility;
@@ -56,7 +56,7 @@ public class ArticleService {
         double likeWeight = 0.5;
         double favWeight = 0.2;
         double commentWeight = 0.3;
-        int hours = 48000000;
+        int hours = 48;
         long startTime = System.currentTimeMillis() - 1000 * 60 * 60 * hours;
         List<Article> articles = this.articleDao.getArticles(startTime);
         List<RecommendArticleVO> abstractArticles = this.articleAssembler.recommendAssembleList(articles);
@@ -105,7 +105,7 @@ public class ArticleService {
         return abstractArticles;
     }
 
-    public void publish(PublishParam publishParam) throws BusinessException {
+    public Long publish(PublishParam publishParam) throws BusinessException {
         LoginUser current = ThreadContext.getLoginToken();
 
         //published_{userId}==> published_1
@@ -130,13 +130,14 @@ public class ArticleService {
             this.articleDao.update(article);
             ArticleDetail articleDetail = this.articleAssembler.assembleDetail(publishParam, publishParam.getId());
             this.articleDetailDao.update(articleDetail);
-            return;
+            return publishParam.getId();
         }
         //新增的逻辑
         // todo 2.0 有草搞业务
-        Long articleId = this.articleDao.insert(article);
-        ArticleDetail articleDetail = this.articleAssembler.assembleDetail(publishParam, articleId);
+        this.articleDao.insert(article);
+        ArticleDetail articleDetail = this.articleAssembler.assembleDetail(publishParam, article.getId());
         this.articleDetailDao.insert(articleDetail);
+        return article.getId();
     }
 
     public PagerResult<AbstractArticleVO> userArticleList(UserArticleQuery userArticleQuery) throws BusinessException {
