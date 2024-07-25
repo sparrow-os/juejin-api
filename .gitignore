@@ -1,8 +1,14 @@
 *.iml
-target
 .idea
 lib
 classes
 logs
 *.jar
 mathjax/node_modules
+target/classes
+target/generated-sources
+target/generated-test-sources
+target/maven-archiver
+target/maven-status
+sparrow-juejin-api.iml
+target/test-classes

@@ -22,5 +22,4 @@ public class InteractController {
     public Result<Boolean> dislike(@PathVariable("articleId") Long articleId) {
         return new Result<>(true);
     }
-
 }

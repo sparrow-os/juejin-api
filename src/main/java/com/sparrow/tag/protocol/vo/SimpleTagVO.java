@@ -14,8 +14,8 @@ public class SimpleTagVO {
         return id;
     }
 
-    public void setTagId(Long tagId) {
-        this.id = tagId;
+    public void setTagId(Long id) {
+        this.id = id;
     }
 
     public String getTagName() {

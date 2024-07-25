@@ -11,10 +11,10 @@ public class Category extends PO {
     @Column(name = "id", columnDefinition = "int(11) UNSIGNED")
     private Long id;
 
-    @Column(name = "code",
-            columnDefinition = "varchar(16)  DEFAULT '' COMMENT '编码'",
+    @Column(name = "sort",
+            columnDefinition = "int(10)  DEFAULT 0 COMMENT '序号'",
             nullable = false)
-    private String code;
+    private Integer sort;
 
     @Column(name = "name",
             columnDefinition = "varchar(32)  DEFAULT '' COMMENT '名称'",
@@ -49,12 +49,12 @@ public class Category extends PO {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getName() {

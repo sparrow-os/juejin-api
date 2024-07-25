@@ -18,5 +18,4 @@ public class FavController {
     public Result<Boolean> fav(@RequestBody FavParam favParam) {
         return new Result<>(true);
     }
-
 }

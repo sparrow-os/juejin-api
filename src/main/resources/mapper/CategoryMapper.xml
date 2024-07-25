@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sparrow.tag.admin.dao.CategoryDAO">
-<resultMap id="CategoryMap" type="com.sparrow.tag.po.Category">
-<id column="id" property="id" />
- <result column="code" property="code"/>
- <result column="name" property="name"/>
- <result column="parent_id" property="parentId"/>
- <result column="icon" property="icon"/>
- <result column="depth" property="depth"/>
- <result column="status" property="status"/>
- <result column="create_user_id" property="createUserId"/>
- <result column="gmt_create" property="gmtCreate"/>
- <result column="modified_user_id" property="modifiedUserId"/>
- <result column="gmt_modified" property="gmtModified"/>
- <result column="create_user_name" property="createUserName"/>
- <result column="modified_user_name" property="modifiedUserName"/>
-</resultMap>
-<sql id="fields">
-`id`,
-`code`,
+<mapper namespace="com.sparrow.tag.dao.CategoryDao">
+    <resultMap id="CategoryMap" type="com.sparrow.tag.po.Category">
+        <id column="id" property="id"/>
+        <result column="sort" property="sort"/>
+        <result column="name" property="name"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="icon" property="icon"/>
+        <result column="depth" property="depth"/>
+        <result column="status" property="status"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="modified_user_id" property="modifiedUserId"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="modified_user_name" property="modifiedUserName"/>
+    </resultMap>
+    <sql id="fields">
+        `id`
+        ,
+`sort`,
 `name`,
 `parent_id`,
 `icon`,
@@ -30,61 +31,82 @@
 `gmt_modified`,
 `create_user_name`,
 `modified_user_name`
-</sql>
-<insert id="insert" parameterType="com.sparrow.tag.po.Category"  useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-insert into `category`(
-`code`,
-`name`,
-`parent_id`,
-`icon`,
-`depth`,
-`status`,
-`create_user_id`,
-`gmt_create`,
-`modified_user_id`,
-`gmt_modified`,
-`create_user_name`,
-`modified_user_name`)values(
-#{code},
-#{name},
-#{parentId},
-#{icon},
-#{depth},
-#{status},
-#{createUserId},
-#{gmtCreate},
-#{modifiedUserId},
-#{gmtModified},
-#{createUserName},
-#{modifiedUserName})</insert> 
-<update id="update" parameterType="com.sparrow.tag.po.Category">
-update `category` set 
-`code`=#{code},
-`name`=#{name},
-`parent_id`=#{parentId},
-`icon`=#{icon},
-`depth`=#{depth},
-`status`=#{status},
-`modified_user_id`=#{modifiedUserId},
-`gmt_modified`=#{gmtModified},
-`create_user_name`=#{createUserName},
-`modified_user_name`=#{modifiedUserName} where id=#{id}
-</update>
-<delete id="delete" parameterType="java.lang.Long">
-delete from `category` where id=#{id}
-</delete>
-<select id="getEntity" resultMap="CategoryMap" parameterType="java.lang.Long">
- SELECT 
-<include refid="fields"/>
- FROM 
-category
-WHERE id= #{id}
-</select>
-<update id="changeStatus" parameterType="com.sparrow.protocol.dao.StatusCriteria">
-update `category` set `status`=#{status},
-`modified_user_name`=#{modifiedUserName},
- `modified_user_id`=#{modifiedUserId},
- `gmt_modified`=#{gmtModified} WHERE id IN
-<foreach collection="idArray" item="id" index="index" open="(" close=")" separator=",">
-#{id}</foreach>
-</update></mapper>
+    </sql>
+    <insert id="insert" parameterType="com.sparrow.tag.po.Category" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into `category`(`sort`,
+                               `name`,
+                               `parent_id`,
+                               `icon`,
+                               `depth`,
+                               `status`,
+                               `create_user_id`,
+                               `gmt_create`,
+                               `modified_user_id`,
+                               `gmt_modified`,
+                               `create_user_name`,
+                               `modified_user_name`)
+        values (#{sort},
+                #{name},
+                #{parentId},
+                #{icon},
+                #{depth},
+                #{status},
+                #{createUserId},
+                #{gmtCreate},
+                #{modifiedUserId},
+                #{gmtModified},
+                #{createUserName},
+                #{modifiedUserName})</insert>
+    <update id="update" parameterType="com.sparrow.tag.po.Category">
+        update `category`
+        set `sort`=#{sort},
+            `name`=#{name},
+            `parent_id`=#{parentId},
+            `icon`=#{icon},
+            `depth`=#{depth},
+            `status`=#{status},
+            `modified_user_id`=#{modifiedUserId},
+            `gmt_modified`=#{gmtModified},
+            `create_user_name`=#{createUserName},
+            `modified_user_name`=#{modifiedUserName}
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="java.lang.Long">
+        delete
+        from `category`
+        where id = #{id}
+    </delete>
+    <select id="getEntity" resultMap="CategoryMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="fields"/>
+        FROM
+        category
+        WHERE id= #{id}
+    </select>
+
+    <select id="exist" resultType="java.lang.Boolean" parameterType="java.lang.Long">
+        SELECT count(id)
+        FROM category
+        WHERE id = #{id}
+    </select>
+
+    <select id="allEnableList" resultMap="CategoryMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="fields"/>
+        FROM
+        category
+        WHERE status=1
+    </select>
+
+
+    <update id="changeStatus" parameterType="com.sparrow.protocol.dao.StatusCriteria">
+        update `category` set `status`=#{status},
+        `modified_user_name`=#{modifiedUserName},
+        `modified_user_id`=#{modifiedUserId},
+        `gmt_modified`=#{gmtModified} WHERE id IN
+        <foreach collection="idArray" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

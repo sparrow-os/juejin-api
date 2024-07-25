@@ -3,8 +3,18 @@ package com.sparrow.tag.protocol.vo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+
 @ApiModel("类别")
 public class CategoryVO {
+    public static CategoryVO root() {
+        CategoryVO root = new CategoryVO();
+        root.setId(0L);
+        root.setParentId(-1L);
+        root.setName("root");
+        return root;
+    }
+
     @ApiModelProperty("主键")
     private Long id;
     @ApiModelProperty("名称")
@@ -13,6 +23,8 @@ public class CategoryVO {
     private Long parentId;
     @ApiModelProperty("icon")
     private String icon;
+    @ApiModelProperty("子类别")
+    private List<CategoryVO> children;
 
     public Long getId() {
         return id;
@@ -44,5 +56,13 @@ public class CategoryVO {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public List<CategoryVO> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<CategoryVO> children) {
+        this.children = children;
     }
 }

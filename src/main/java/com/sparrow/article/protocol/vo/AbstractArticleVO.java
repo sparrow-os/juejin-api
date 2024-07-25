@@ -23,12 +23,20 @@ public class AbstractArticleVO implements VO {
     @ApiModelProperty("踩数")
     private Integer dislikeCount;
 
+    @ApiModelProperty("收藏数")
+    private Integer favCount;
+
+    @ApiModelProperty("评论数")
+    private Integer commentCount;
+
     @ApiModelProperty("展示数")
     private Integer viewCount;
     @ApiModelProperty("标签")
     private String tags;
     @ApiModelProperty("封面图")
     private String coverImage;
+    @ApiModelProperty("推荐评分")
+    private Double score;
 
     public Long getId() {
         return id;
@@ -116,5 +124,29 @@ public class AbstractArticleVO implements VO {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getFavCount() {
+        return favCount;
+    }
+
+    public void setFavCount(Integer favCount) {
+        this.favCount = favCount;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
     }
 }
