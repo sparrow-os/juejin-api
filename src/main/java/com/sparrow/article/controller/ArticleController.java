@@ -30,9 +30,8 @@ public class ArticleController {
 
     @PostMapping("publish")
     @ApiOperation("发布")
-    public Boolean publish(@RequestBody PublishParam publishParam) throws BusinessException {
-        this.articleService.publish(publishParam);
-        return Boolean.TRUE;
+    public Long publish(@RequestBody PublishParam publishParam) throws BusinessException {
+        return this.articleService.publish(publishParam);
     }
 
 

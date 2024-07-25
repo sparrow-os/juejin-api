@@ -54,6 +54,14 @@ public class ArticleAssembler {
         article.setModifiedUserName(loginUser.getUserName());
         article.setGmtCreate(System.currentTimeMillis());
         article.setGmtModified(System.currentTimeMillis());
+        article.setViewCount(0);
+        article.setLikeCount(0);
+        article.setStatus(0);
+        article.setAuditStatus(0);
+        article.setDislikeCount(0);
+        article.setFavCount(0);
+        article.setCommentCount(0);
+        article.setColumnId(0L);
         return article;
     }
 

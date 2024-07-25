@@ -13,6 +13,9 @@ public class TagService {
     private TagDao tagDao;
 
     public List<Tag> queryByLastId(Long lastId) {
+        if (lastId == null) {
+            lastId = 0L;
+        }
         return this.tagDao.queryByLastId(lastId);
     }
 
