@@ -16,13 +16,10 @@ import javax.inject.Inject;
 public class RedisTest {
     @Inject
     private RedisTemplate redisTemplate;
-
     @Inject
     private StringRedisTemplate stringRedisTemplate;
-
     @Inject
     private RedisTemplate originRedisTemplate;
-
     @Test
     public void stringTest() {
         redisTemplate.opsForValue().set("name", "lisi");
@@ -37,10 +34,8 @@ public class RedisTest {
         redisTemplate.opsForValue().set("name", user);
 //        stringRedisTemplate.opsForValue().set("string-name", user);
         originRedisTemplate.opsForValue().set("origin-name", user);
-
         Long s = redisTemplate.opsForValue().increment("new2");
         redisTemplate.opsForValue().get("new");
         System.out.println("end");
-
     }
 }
