@@ -13,7 +13,7 @@ public class LoginQuery {
     private String password;
 
     @ApiModelProperty("记住我")
-    private Boolean remember;
+    private Boolean rememberMe;
 
     @ApiModelProperty("验证码")
     private String captcha;
@@ -37,15 +37,12 @@ public class LoginQuery {
         this.password = password;
     }
 
-    public Boolean getRemember() {
-        if (remember == null) {
-            return false;
-        }
-        return remember;
+    public Boolean getRememberMe() {
+        return rememberMe;
     }
 
-    public void setRemember(Boolean remember) {
-        this.remember = remember;
+    public void setRememberMe(Boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 
     public String getCaptcha() {

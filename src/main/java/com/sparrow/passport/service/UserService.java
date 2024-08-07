@@ -63,7 +63,7 @@ public class UserService {
 
         //TODO SEND LOGIN event mq
 
-        Integer tokenExpireDays = loginQuery.getRemember() ? 14 : 1;
+        Integer tokenExpireDays = loginQuery.getRememberMe() ? 14 : 1;
         LoginUser loginUser = LoginUser.create(user.getUserId(), user.getUserName(), user.getNickName(), user.getAvatar(), clientInformation.getDeviceId(), tokenExpireDays);
         //续期
         //踢除逻辑
@@ -82,6 +82,8 @@ public class UserService {
      * 8.写数据库
      */
     public String register(EmailRegisterParam registerParam) throws BusinessException {
+        String captcha = captchaService.getCaptcha(HttpContext.getContext().getRequest().getRequestedSessionId());
+        Asserts.isTrue(!registerParam.getCaptcha().equalsIgnoreCase(captcha), SparrowError.GLOBAL_VALIDATE_CODE_ERROR);
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getEmail()), PassportError.USER_REGISTER_EMAIL_NULL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getUserName()), PassportError.USER_REGISTER_NAME_NULL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getPassword()), PassportError.USER_PASSWORD_ERROR);
