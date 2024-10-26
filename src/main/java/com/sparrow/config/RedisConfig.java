@@ -51,8 +51,8 @@ public class RedisConfig {
         return new StringRedisTemplate(redisConnectionFactory);
     }
 
-    @Bean
-    public OperateLimiter operateLimiter(StringRedisTemplate redisTemplate) {
-        return new OperateLimiter(redisTemplate);
-    }
+//    @Bean
+//    public OperateLimiter operateLimiter(StringRedisTemplate redisTemplate) {
+//        return new OperateLimiter(redisTemplate);
+//    }
 }
