@@ -1,7 +1,9 @@
 package com.sparrow.article.redis;
 
+import com.sparrow.support.PropertyAccessor;
+
 public class PropertyAccessBuilder {
-    public static class ArticlePropertyAccess implements PropertiesAccessor {
+    public static class ArticlePropertyAccess implements PropertyAccessor {
         public ArticlePropertyAccess(Builder builder) {
             this.userId = builder.userId;
             this.threadId = builder.threadId;
@@ -37,18 +39,18 @@ public class PropertyAccessBuilder {
                 return this;
             }
 
-            public PropertiesAccessor build() {
+            public PropertyAccessor build() {
                 return new ArticlePropertyAccess(this);
             }
         }
     }
 
 
-    public static PropertiesAccessor buildPublishLimitKey(Long userId) {
+    public static PropertyAccessor buildPublishLimitKey(Long userId) {
         return new ArticlePropertyAccess.Builder().userId(userId).build();
     }
 
-    public static PropertiesAccessor buildThreadLike(Long userId, Long threadId) {
+    public static PropertyAccessor buildThreadLike(Long userId, Long threadId) {
         return new ArticlePropertyAccess.Builder().userId(userId).threadId(threadId).build();
     }
 }

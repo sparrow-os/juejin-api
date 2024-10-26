@@ -19,6 +19,7 @@ public class CategoryService {
     @Inject
     private CategoryDao categoryDao;
 
+
     public Boolean exist(Long categoryId) {
         return this.categoryDao.exist(categoryId);
     }

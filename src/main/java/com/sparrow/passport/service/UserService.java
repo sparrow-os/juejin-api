@@ -10,10 +10,15 @@ import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.passport.protocol.query.LoginQuery;
 import com.sparrow.passport.support.PassportRegex;
 import com.sparrow.protocol.*;
+import com.sparrow.protocol.constant.Constant;
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
+import com.sparrow.servlet.ServletContainer;
 import com.sparrow.support.Authenticator;
+import com.sparrow.support.CaptchaService;
+import com.sparrow.support.web.HttpContext;
+import com.sparrow.support.web.ServletUtility;
 import com.sparrow.utility.RegexUtility;
 import com.sparrow.utility.StringUtility;
 
@@ -31,7 +36,12 @@ public class UserService {
     @Inject
     private UserAssembler userAssembler;
 
+    @Inject
+    CaptchaService captchaService;
+
     public String login(LoginQuery loginQuery) throws BusinessException {
+        String captcha = captchaService.getCaptcha(HttpContext.getContext().getRequest().getRequestedSessionId());
+        Asserts.isTrue(!loginQuery.getCaptcha().equalsIgnoreCase(captcha), SparrowError.GLOBAL_VALIDATE_CODE_ERROR);
         //刷呀 todo 防刷策略
         Asserts.isTrue(StringUtility.isNullOrEmpty(loginQuery.getUserName()), SparrowError.GLOBAL_PARAMETER_IS_ILLEGAL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(loginQuery.getPassword()), SparrowError.GLOBAL_PARAMETER_IS_ILLEGAL);
@@ -53,7 +63,7 @@ public class UserService {
 
         //TODO SEND LOGIN event mq
 
-        Integer tokenExpireDays = loginQuery.getRemember() ? 14 : 1;
+        Integer tokenExpireDays = loginQuery.getRememberMe() ? 14 : 1;
         LoginUser loginUser = LoginUser.create(user.getUserId(), user.getUserName(), user.getNickName(), user.getAvatar(), clientInformation.getDeviceId(), tokenExpireDays);
         //续期
         //踢除逻辑
@@ -72,15 +82,17 @@ public class UserService {
      * 8.写数据库
      */
     public String register(EmailRegisterParam registerParam) throws BusinessException {
+        String captcha = captchaService.getCaptcha(HttpContext.getContext().getRequest().getRequestedSessionId());
+        Asserts.isTrue(!registerParam.getCaptcha().equalsIgnoreCase(captcha), SparrowError.GLOBAL_VALIDATE_CODE_ERROR);
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getEmail()), PassportError.USER_REGISTER_EMAIL_NULL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getUserName()), PassportError.USER_REGISTER_NAME_NULL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(registerParam.getPassword()), PassportError.USER_PASSWORD_ERROR);
         Asserts.isTrue(!RegexUtility.matches(registerParam.getPassword(), Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR);
-        Asserts.isTrue(!RegexUtility.matches(registerParam.getPasswordConfirm(), Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR);
+        Asserts.isTrue(!RegexUtility.matches(registerParam.getConfirmPassword(), Regex.PASSWORD), PassportError.USER_PASSWORD_FORMAT_ERROR);
         Asserts.isTrue(!RegexUtility.matches(registerParam.getUserName(), PassportRegex.USER_NAME), PassportError.USER_REGISTER_USER_NAME_FORMAT_ERROR);
         Asserts.isTrue(!RegexUtility.matches(registerParam.getEmail(), PassportRegex.EMAIL), PassportError.USER_REGISTER_EMAIL_FORMAT_ERROR);
 
-        Asserts.isTrue(!registerParam.getPassword().equals(registerParam.getPasswordConfirm()), PassportError.USER_REGISTER_PASSWORD_NOT_CONFORM);
+        Asserts.isTrue(!registerParam.getPassword().equals(registerParam.getConfirmPassword()), PassportError.USER_REGISTER_PASSWORD_NOT_CONFORM);
         User existUserName = this.userDao.getUserByName(registerParam.getUserName());
         Asserts.isTrue(existUserName != null, PassportError.USER_NAME_EXIST);
         User existEmail = this.userDao.getUserByEmail(registerParam.getEmail());
