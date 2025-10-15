@@ -75,11 +75,4 @@ public class Tag extends PO {
         this.weight = weight;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
 }

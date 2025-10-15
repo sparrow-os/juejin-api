@@ -1,11 +1,11 @@
 package com.sparrow.article.protocol.vo;
 
-import com.sparrow.protocol.VO;
+import com.sparrow.protocol.DTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("文章摘要列表")
-public class AbstractArticleVO implements VO {
+public class AbstractArticleVO implements DTO {
     @ApiModelProperty("ID")
     private Long id;
     @ApiModelProperty("标题")

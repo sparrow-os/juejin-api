@@ -1,11 +1,11 @@
 package com.sparrow.cms.protocol.vo;
 
-import com.sparrow.protocol.VO;
+import com.sparrow.protocol.DTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("菜单")
-public class MenuVO implements VO {
+public class MenuVO implements DTO {
     @ApiModelProperty("菜单ID")
     private Integer id;
     @ApiModelProperty("菜单名")

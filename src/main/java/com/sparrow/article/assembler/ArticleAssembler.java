@@ -5,8 +5,9 @@ import com.sparrow.article.po.ArticleDetail;
 import com.sparrow.article.protocol.param.PublishParam;
 import com.sparrow.article.protocol.vo.AbstractArticleVO;
 import com.sparrow.article.protocol.vo.ArticleVO;
+import com.sparrow.context.SessionContext;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.ThreadContext;
+import com.sparrow.protocol.enums.StatusRecord;
 import com.sparrow.recommend.protocol.vo.RecommendArticleVO;
 import com.sparrow.utility.CollectionsUtility;
 import org.springframework.beans.BeanUtils;
@@ -23,7 +24,7 @@ public class ArticleAssembler {
         articleDetail.setContent(publishParam.getContent());
         articleDetail.setId(articleId);
         //上下文的用户信息
-        LoginUser loginUser = ThreadContext.getLoginToken();
+        LoginUser loginUser = SessionContext.getLoginUser();
         //需要手动设置
         articleDetail.setCreateUserName(loginUser.getUserName());
         articleDetail.setCreateUserId(loginUser.getUserId());
@@ -46,7 +47,7 @@ public class ArticleAssembler {
         //标签的优化
         article.setTags(Arrays.toString(publishParam.getTags()));
         //上下文的用户信息
-        LoginUser loginUser = ThreadContext.getLoginToken();
+        LoginUser loginUser = SessionContext.getLoginUser();
         //需要手动设置
         article.setCreateUserName(loginUser.getUserName());
         article.setCreateUserId(loginUser.getUserId());
@@ -56,7 +57,7 @@ public class ArticleAssembler {
         article.setGmtModified(System.currentTimeMillis());
         article.setViewCount(0);
         article.setLikeCount(0);
-        article.setStatus(0);
+        article.setStatus(StatusRecord.ENABLE);
         article.setAuditStatus(0);
         article.setDislikeCount(0);
         article.setFavCount(0);

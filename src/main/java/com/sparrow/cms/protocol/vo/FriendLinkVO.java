@@ -1,11 +1,11 @@
 package com.sparrow.cms.protocol.vo;
 
-import com.sparrow.protocol.VO;
+import com.sparrow.protocol.DTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("友情链接")
-public class FriendLinkVO implements VO {
+public class FriendLinkVO implements DTO {
     @ApiModelProperty("友链ID")
     private Integer id;
     @ApiModelProperty("友链名称")

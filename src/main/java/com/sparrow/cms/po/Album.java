@@ -1,6 +1,5 @@
 package com.sparrow.cms.po;
 
-import com.sparrow.protocol.FieldOrder;
 import com.sparrow.protocol.dao.PO;
 
 import javax.persistence.*;
@@ -10,24 +9,19 @@ public class Album extends PO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "int(11) UNSIGNED")
-    @FieldOrder(order = 1)
     private Long id;
 
-    @FieldOrder(order = 2)
     @Column(name = "name", columnDefinition = "varchar(32)  DEFAULT '' COMMENT '相册名称'", nullable = false)
     private String name;
 
-    @FieldOrder(order = 3)
     @Column(name = "code", columnDefinition = "varchar(16) DEFAULT '' COMMENT '相册编码'", nullable = false)
     private String code;
 
 
-    @FieldOrder(order = 4)
     @Column(name = "description", columnDefinition = "varchar(512)  DEFAULT '' COMMENT '相册说明描述'", nullable = false)
     private String description;
 
 
-    @FieldOrder(order = 11)
     @Column(name = "sort", columnDefinition = "int(10) DEFAULT 0 COMMENT '排序号'", nullable = false)
     private Integer sort;
 

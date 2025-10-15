@@ -1,6 +1,5 @@
 package com.sparrow.interact.po;
 
-import com.sparrow.protocol.FieldOrder;
 import com.sparrow.protocol.dao.PO;
 
 import javax.persistence.*;
@@ -10,33 +9,25 @@ public class ReplyComment extends PO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "int(11) UNSIGNED")
-    @FieldOrder(order = 1)
     private Long id;
 
-    @FieldOrder(order = 2)
     @Column(name = "article_id", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '文章ID'", nullable = false)
     private Long articleId;
 
-    @FieldOrder(order = 3)
     @Column(name = "root_reply_comment_id", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '根回复ID'", nullable = false)
     private Long rootReplyCommentId;
 
-    @FieldOrder(order = 4)
     @Column(name = "content", columnDefinition = "varchar(512) DEFAULT 0 COMMENT '评论内容'", nullable = false)
     private Long content;
 
-    @FieldOrder(order = 5)
     @Column(name = "like_count", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '喜欢数'", nullable = false)
     private Integer likeCount;
 
-    @FieldOrder(order = 6)
     @Column(name = "reply_comment_id", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '回复评论id'", nullable = false)
     private Long replyCommentId;
 
-    @FieldOrder(order = 7)
     @Column(name = "reply_to_user_id", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '回复用户ID'", nullable = false)
     private Long replyToUserId;
-    @FieldOrder(order = 8)
     @Column(name = "reply_to_user_name", columnDefinition = "varchar(32) DEFAULT '' COMMENT '回复用户名'", nullable = false)
     private String replyToUserName;
 

@@ -1,6 +1,5 @@
 package com.sparrow.interact.po;
 
-import com.sparrow.protocol.FieldOrder;
 import com.sparrow.protocol.dao.PO;
 
 import javax.persistence.*;
@@ -10,22 +9,17 @@ public class Comment extends PO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "int(11) UNSIGNED")
-    @FieldOrder(order = 1)
     private Long id;
 
-    @FieldOrder(order = 2)
     @Column(name = "article_id", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '文章ID'", nullable = false)
     private Long articleId;
 
-    @FieldOrder(order = 3)
     @Column(name = "content", columnDefinition = "varchar(512) DEFAULT 0 COMMENT '评论内容'", nullable = false)
     private String content;
 
-    @FieldOrder(order = 4)
     @Column(name = "like_count", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '喜欢数'", nullable = false)
     private Integer likeCount;
 
-    @FieldOrder(order = 5)
     @Column(name = "comment_count", columnDefinition = "int(11) UNSIGNED DEFAULT 0 COMMENT '评论数'", nullable = false)
     private Integer commentCount;
 

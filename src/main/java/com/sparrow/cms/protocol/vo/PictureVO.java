@@ -1,11 +1,11 @@
 package com.sparrow.cms.protocol.vo;
 
-import com.sparrow.protocol.VO;
+import com.sparrow.protocol.DTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("图片")
-public class PictureVO implements VO {
+public class PictureVO implements DTO {
     @ApiModelProperty("图片ID")
     private Long id;
     @ApiModelProperty("图片名称")

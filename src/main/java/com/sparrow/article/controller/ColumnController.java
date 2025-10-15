@@ -4,8 +4,8 @@ import com.sparrow.article.dao.ColumnDao;
 import com.sparrow.article.po.Columns;
 import com.sparrow.article.protocol.vo.ColumnVO;
 import com.sparrow.article.service.ColumnsService;
+import com.sparrow.context.SessionContext;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.ThreadContext;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +35,7 @@ public class ColumnController {
     @ApiOperation("我的专栏-全部")
     @PostMapping("/all")
     public List<Columns> columnAll() {
-        LoginUser loginUser = ThreadContext.getLoginToken();
+        LoginUser loginUser = SessionContext.getLoginUser();
         return this.columnDao.myAllList(loginUser.getUserId());
     }
 

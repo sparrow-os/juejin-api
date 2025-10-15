@@ -1,6 +1,5 @@
 package com.sparrow.article.service;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.sparrow.article.assembler.ArticleAssembler;
 import com.sparrow.article.dao.ArticleDao;
 import com.sparrow.article.dao.ArticleDetailDao;
@@ -16,10 +15,10 @@ import com.sparrow.article.protocol.vo.ArticleVO;
 import com.sparrow.article.redis.PropertyAccessBuilder;
 import com.sparrow.article.redis.RedisKey;
 import com.sparrow.article.support.ArticleError;
+import com.sparrow.context.SessionContext;
 import com.sparrow.exception.Asserts;
 import com.sparrow.protocol.BusinessException;
 import com.sparrow.protocol.LoginUser;
-import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.protocol.constant.magic.Digit;
 import com.sparrow.protocol.pager.PagerResult;
@@ -29,7 +28,6 @@ import com.sparrow.support.PlaceHolderParser;
 import com.sparrow.tag.service.CategoryService;
 import com.sparrow.utility.CollectionsUtility;
 import com.sparrow.utility.StringUtility;
-import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -106,10 +104,10 @@ public class ArticleService {
     }
 
     public Long publish(PublishParam publishParam) throws BusinessException {
-        LoginUser current = ThreadContext.getLoginToken();
+        LoginUser loginUser = SessionContext.getLoginUser();
 
         //published_{userId}==> published_1
-        String publishedLimitKey = PlaceHolderParser.parse(RedisKey.PUBLISHED_LIMIT_KEY, PropertyAccessBuilder.buildPublishLimitKey(current.getUserId()));
+        String publishedLimitKey = PlaceHolderParser.parse(RedisKey.PUBLISHED_LIMIT_KEY, PropertyAccessBuilder.buildPublishLimitKey(loginUser.getUserId()));
         //用户ID 时间 次数 要不要续期？
         boolean passed = this.operateLimiter.renewalLimit(publishedLimitKey, 5, 1000 * 60 * 5L);
 
@@ -146,7 +144,7 @@ public class ArticleService {
 
         UserArticleDBQuery userArticleDBQuery = new UserArticleDBQuery(userArticleQuery);
         userArticleDBQuery.setUserId(userArticleQuery.getUserId());
-        LoginUser loginUser = ThreadContext.getLoginToken();
+        LoginUser loginUser = SessionContext.getLoginUser();
         //这里可能拿不到，可能是游客
         userArticleDBQuery.setAccessUserId(loginUser.getUserId());
         List<Article> articles = this.articleDao.queryUserArticles(userArticleDBQuery);
@@ -163,7 +161,7 @@ public class ArticleService {
     public PagerResult<AbstractArticleVO> myArticleList(MyArticleQuery myArticleQuery, Integer status) throws BusinessException {
         Asserts.isTrue(myArticleQuery.getPageSize() > Digit.HUNDRED, ArticleError.ARTICLE_PAGE_SIZE_EXCEED);
         MyArticleDBQuery myArticleDBQuery = new MyArticleDBQuery(myArticleQuery);
-        LoginUser loginUser = ThreadContext.getLoginToken();
+        LoginUser loginUser = SessionContext.getLoginUser();
         myArticleDBQuery.setUserId(loginUser.getUserId());
         myArticleDBQuery.setAuditStatus(status);
         List<Article> articles = this.articleDao.queryMyArticles(myArticleDBQuery);

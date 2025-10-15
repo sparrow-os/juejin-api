@@ -165,14 +165,6 @@ public class Article extends PO {
         this.auditStatus = auditStatus;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Integer getFavCount() {
         return favCount;
     }

@@ -1,11 +1,10 @@
 package com.sparrow.passport.assembler;
 
+import com.sparrow.context.SessionContext;
 import com.sparrow.enums.Gender;
 import com.sparrow.passport.po.User;
 import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
-import com.sparrow.passport.protocol.param.register.RegisterParam;
 import com.sparrow.protocol.ClientInformation;
-import com.sparrow.protocol.ThreadContext;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.support.IpSupport;
 
@@ -19,7 +18,7 @@ public class UserAssembler {
     private IpSupport ipSupport;
 
     public User assemblerUser(EmailRegisterParam registerParam, String encryptionPassword) {
-        ClientInformation clientInformation = ThreadContext.getClientInfo();
+        ClientInformation clientInformation = SessionContext.getClientInfo();
         User user = new User();
         user.setUserName(registerParam.getUserName());
         user.setEmail(registerParam.getEmail());

@@ -1,6 +1,7 @@
 package com.sparrow.passport.service;
 
 import com.sparrow.constant.Regex;
+import com.sparrow.context.SessionContext;
 import com.sparrow.exception.Asserts;
 import com.sparrow.passport.assembler.UserAssembler;
 import com.sparrow.passport.dao.UserDAO;
@@ -10,15 +11,12 @@ import com.sparrow.passport.protocol.param.register.EmailRegisterParam;
 import com.sparrow.passport.protocol.query.LoginQuery;
 import com.sparrow.passport.support.PassportRegex;
 import com.sparrow.protocol.*;
-import com.sparrow.protocol.constant.Constant;
+
 import com.sparrow.protocol.constant.SparrowError;
 import com.sparrow.protocol.constant.magic.Symbol;
 import com.sparrow.protocol.enums.StatusRecord;
-import com.sparrow.servlet.ServletContainer;
-import com.sparrow.support.Authenticator;
 import com.sparrow.support.CaptchaService;
 import com.sparrow.support.web.HttpContext;
-import com.sparrow.support.web.ServletUtility;
 import com.sparrow.utility.RegexUtility;
 import com.sparrow.utility.StringUtility;
 
@@ -31,8 +29,8 @@ public class UserService {
     private UserDAO userDao;
     @Inject
     private EncryptionService encryptionService;
-    @Inject
-    private Authenticator authenticatorService;
+//    @Inject
+//    private Authenticator authenticatorService;
     @Inject
     private UserAssembler userAssembler;
 
@@ -46,7 +44,7 @@ public class UserService {
         Asserts.isTrue(StringUtility.isNullOrEmpty(loginQuery.getUserName()), SparrowError.GLOBAL_PARAMETER_IS_ILLEGAL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(loginQuery.getPassword()), SparrowError.GLOBAL_PARAMETER_IS_ILLEGAL);
         Asserts.isTrue(StringUtility.isNullOrEmpty(loginQuery.getCaptcha()), SparrowError.GLOBAL_PARAMETER_IS_ILLEGAL);
-        ClientInformation clientInformation = ThreadContext.getClientInfo();
+        ClientInformation clientInformation = SessionContext.getClientInfo();
         User user = null;
         if (loginQuery.getUserName().contains(Symbol.AT)) {
             user = this.userDao.getUserByEmail(loginQuery.getUserName());
@@ -62,13 +60,15 @@ public class UserService {
         Asserts.isTrue(!encryptedPassword.equals(user.getPassword()), PassportError.USER_PASSWORD_ERROR);
 
         //TODO SEND LOGIN event mq
+        //todo 框架升级，学员可根据视频内容自行实现
 
         Integer tokenExpireDays = loginQuery.getRememberMe() ? 14 : 1;
-        LoginUser loginUser = LoginUser.create(user.getUserId(), user.getUserName(), user.getNickName(), user.getAvatar(), clientInformation.getDeviceId(), tokenExpireDays);
-        //续期
-        //踢除逻辑
-        LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
-        return this.authenticatorService.sign(loginUser, loginUserStatus);
+        return null;
+//        LoginUser loginUser = LoginUser.create(user.getUserId(),LoginUser.CATEGORY_REGISTER, user.getUserName(), user.getNickName(), user.getAvatar(), clientInformation.getDeviceId(), tokenExpireDays);
+//        //续期
+//        //踢除逻辑
+//        LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
+//        return this.authenticatorService.sign(loginUser, loginUserStatus);
     }
 
     /**
@@ -100,9 +100,11 @@ public class UserService {
         String encryptionPassword = this.encryptionService.encryptPassword(registerParam.getPassword());
         User user = this.userAssembler.assemblerUser(registerParam, encryptionPassword);
         this.userDao.insert(user);
-        ClientInformation clientInformation = ThreadContext.getClientInfo();
-        LoginUser loginUser = LoginUser.create(user.getUserId(), user.getUserName(), user.getNickName(), user.getAvatar(), clientInformation.getDeviceId(), 1);
-        LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
-        return this.authenticatorService.sign(loginUser, loginUserStatus);
+        //todo 框架升级，学员可根据视频内容自行实现
+        return null;
+//        ClientInformation clientInformation = ThreadContext.getClientInfo();
+//        LoginUser loginUser = LoginUser.create(user.getUserId(),LoginUser.CATEGORY_REGISTER, user.getUserName(), user.getNickName(), user.getAvatar(), clientInformation.getDeviceId(), 1);
+//        LoginUserStatus loginUserStatus = new LoginUserStatus(LoginUserStatus.STATUS_NORMAL, loginUser.getExpireAt());
+//        return this.authenticatorService.sign(loginUser, loginUserStatus);
     }
 }
